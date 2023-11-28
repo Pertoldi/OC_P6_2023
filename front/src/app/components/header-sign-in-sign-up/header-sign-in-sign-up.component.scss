@@ -1,0 +1,55 @@
+@import '../../../styles/vars.scss';
+
+img {
+  width: 90%;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  margin-top: 70px;
+}
+
+.line {
+  display: none;
+}
+
+.keyboard_backspace {
+  font-size: 55px;
+  width: 55px;
+  height: 60px;
+  position: absolute;
+  top: 15px;
+  left: 30px;
+}
+
+.keyboard_backspace:hover {
+  cursor: pointer;
+}
+
+@media screen and (min-width: $break-point) {
+  .img-container {
+    display: block;
+    margin-top: 0;
+  }
+
+  .keyboard_backspace {
+    font-weight: lighter;
+    // margin-top: 85px;
+    top: 100px;
+    position: absolute;
+  }
+
+  .line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+  }
+
+  img {
+    width: 150px;
+  }
+}

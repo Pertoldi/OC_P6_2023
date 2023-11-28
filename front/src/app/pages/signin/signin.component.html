@@ -1,0 +1,5 @@
+<app-header-sign-in-sign-up></app-header-sign-in-sign-up>
+
+<form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+  <input type="text" formControlName="userName">
+</form>
