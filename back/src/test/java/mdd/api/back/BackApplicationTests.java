@@ -1,10 +1,10 @@
-package com.openclassrooms.mddapi;
+package mdd.api.back;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MddApiApplicationTests {
+class BackApplicationTests {
 
 	@Test
 	void contextLoads() {
