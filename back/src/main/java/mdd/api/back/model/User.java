@@ -48,12 +48,6 @@ public class User implements UserDetails { // UserDetails to make User a spring 
   }
 
   @Override
-  public String getPassword() { // getPassword already return password so we don't need to Override it but if
-                                // our password is named pwd we need to Override it.
-    return password;
-  }
-
-  @Override
   public String getUsername() {
     return email;
   }
