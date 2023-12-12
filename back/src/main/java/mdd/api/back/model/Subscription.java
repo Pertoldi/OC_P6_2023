@@ -34,11 +34,11 @@ public class Subscription {
   @JoinColumn(name = "subject_id")
   private Subject subject;
 
-  @Column(name = "subscription_date")
-  private LocalDateTime subscriptionDate;
+  @Column(name = "created_at", updatable = false)
+  private LocalDateTime createdAt;
 
   @PrePersist
   protected void onCreate() {
-    subscriptionDate = LocalDateTime.now();
+    createdAt = LocalDateTime.now();
   }
 }
