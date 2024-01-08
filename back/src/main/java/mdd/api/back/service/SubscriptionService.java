@@ -31,8 +31,8 @@ public class SubscriptionService {
   public void configureModelMapper() {
     modelMapper.createTypeMap(Subscription.class, SubscriptionDto.class)
         .addMapping(src -> src.getUser().getId(), SubscriptionDto::setUserId)
-        .addMapping(src -> src.getSubject().getId(), SubscriptionDto::setSubjectId);
-
+        .addMapping(src -> src.getSubject().getId(), SubscriptionDto::setSubjectId)
+        .addMapping(src -> src.getCreatedAt(), SubscriptionDto::setCreatedAt);
   }
 
   private SubscriptionDto mapToSubscriptionDto(Subscription subscription) {

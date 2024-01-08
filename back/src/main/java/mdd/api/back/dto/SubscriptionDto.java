@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class SubscriptionDto {
   private Integer userId;
   private Integer subjectId;
-  private LocalDateTime subscriptionDate;
+  private LocalDateTime createdAt;
 }
