@@ -1,19 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-
 @Component({
-  selector: 'app-home',
   standalone: true,
+  selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [MatButtonModule]
+  imports: [MatButtonModule],
 })
 export class HomeComponent implements OnInit {
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void { }
 
-  start() {
-    alert('Commencez par lire le README et à vous de jouer !');
+  signIn() {
+    this.router.navigate(['/signin']);
   }
+
+  signUp() {
+    this.router.navigate(['/signup']);
+  }
+
 }
