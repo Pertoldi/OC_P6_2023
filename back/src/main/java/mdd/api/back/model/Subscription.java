@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "SUBSCRIPTIONS")
-@IdClass(SubscriptionId.class) // specifying the class for the composite primary key
+@IdClass(SubscriptionId.class)
 public class Subscription {
 
   @Id
