@@ -43,7 +43,7 @@ public class AuthenticationController {
 
     String jwt = authHeader.substring(7);
     String userEmail = jwtService.extractUserEmail(jwt);
-    return ResponseEntity.ok(userService.getUserByEmail(userEmail));
+    return ResponseEntity.ok(userService.getByEmail(userEmail));
 
   }
 }

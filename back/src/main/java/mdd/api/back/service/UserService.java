@@ -24,11 +24,11 @@ public class UserService {
     return userId;
   }
 
-  public User getUserByEmail(String email) {
+  public User getByEmail(String email) {
     return userRepository.findByEmail(email).orElse(null);
   }
 
-  public UserDto getUserById(Integer id) {
+  public UserDto getById(Integer id) {
     User user = userRepository.findById(id).orElse(null);
     if (user != null) {
       return modelMapper.map(user, UserDto.class);

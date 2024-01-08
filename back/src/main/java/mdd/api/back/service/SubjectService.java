@@ -31,7 +31,7 @@ public class SubjectService {
     return modelMapper.map(subject, SubjectDto.class);
   }
 
-  public Map<String, List<SubjectDto>> getSubjects() {
+  public Map<String, List<SubjectDto>> getAll() {
     List<Subject> subjects = subjectRepository.findAll();
     List<SubjectDto> subjectDtos = subjects.stream()
         .map(this::mapToSubjectDto)
@@ -43,7 +43,7 @@ public class SubjectService {
     return response;
   }
 
-  public SubjectDto getSubject(Integer id) {
+  public SubjectDto getById(Integer id) {
     Subject subject = subjectRepository.findById(id).orElse(null);
     if (subject != null) {
       return mapToSubjectDto(subject);

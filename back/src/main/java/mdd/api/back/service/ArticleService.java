@@ -53,7 +53,7 @@ public class ArticleService {
     User user = userRepository.findByEmail(userDetails.getUsername())
         .orElseThrow(() -> new RuntimeException("User not found"));
 
-    Subject subject = modelMapper.map(subjectService.getSubject(articleRequest.getSubjectId()), Subject.class);
+    Subject subject = modelMapper.map(subjectService.getById(articleRequest.getSubjectId()), Subject.class);
     if (subject == null) {
       throw new RuntimeException("Subject not found");
     }
@@ -68,19 +68,19 @@ public class ArticleService {
     return mapToArticleDto(savedArticle);
   }
 
-  public List<ArticleResponse> getAllArticlesWithDetails() {
+  public List<ArticleResponse> getAll() {
     List<Article> articles = articleRepository.findAll();
-    List<ArticleResponse> articleResponseArticleResponses = new ArrayList<>();
+    List<ArticleResponse> articleResponses = new ArrayList<>();
 
     for (Article article : articles) {
-      ArticleResponse articleResponseArticleResponse = mapArticleToDto(article);
-      articleResponseArticleResponses.add(articleResponseArticleResponse);
+      ArticleResponse articleResponse = mapArticleToDto(article);
+      articleResponses.add(articleResponse);
     }
 
-    return articleResponseArticleResponses;
+    return articleResponses;
   }
 
-  public ArticleResponse getArticleById(Integer id) {
+  public ArticleResponse getById(Integer id) {
     Optional<Article> articleOptional = articleRepository.findById(id);
     if (articleOptional.isPresent()) {
       Article article = articleOptional.get();
@@ -91,13 +91,13 @@ public class ArticleService {
   }
 
   private ArticleResponse mapArticleToDto(Article article) {
-    SubjectDto subjectDto = subjectService.getSubject(article.getSubject().getId());
-    UserDto userDto = userService.getUserById(article.getAuthor().getId());
+    SubjectDto subjectDto = subjectService.getById(article.getSubject().getId());
+    UserDto userDto = userService.getById(article.getAuthor().getId());
 
     List<CommentResponse> commentResponses = article.getComments().stream()
         .map(comment -> {
           CommentResponse commentResponse = modelMapper.map(comment, CommentResponse.class);
-          UserDto commentUserDto = userService.getUserById(comment.getAuthor().getId());
+          UserDto commentUserDto = userService.getById(comment.getAuthor().getId());
           commentResponse.setAuthor(commentUserDto);
           return commentResponse;
         })

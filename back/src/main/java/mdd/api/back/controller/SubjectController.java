@@ -21,13 +21,13 @@ public class SubjectController {
   private final SubjectService subjectService;
 
   @GetMapping
-  public Map<String, List<SubjectDto>> getSubjects() {
-    return subjectService.getSubjects();
+  public Map<String, List<SubjectDto>> getAll() {
+    return subjectService.getAll();
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<SubjectDto> getSubject(@PathVariable Integer id) {
-    SubjectDto subjectsDto = subjectService.getSubject(id);
+  public ResponseEntity<SubjectDto> getById(@PathVariable Integer id) {
+    SubjectDto subjectsDto = subjectService.getById(id);
     if (subjectsDto == null) {
       return ResponseEntity.notFound().build();
     }

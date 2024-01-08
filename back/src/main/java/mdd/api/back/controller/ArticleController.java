@@ -31,14 +31,14 @@ public class ArticleController {
   }
 
   @GetMapping
-  public ResponseEntity<List<ArticleResponse>> getAllArticles() {
-    List<ArticleResponse> articles = articleService.getAllArticlesWithDetails();
+  public ResponseEntity<List<ArticleResponse>> getAll() {
+    List<ArticleResponse> articles = articleService.getAll();
     return new ResponseEntity<>(articles, HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<ArticleResponse> getArticleById(@PathVariable Integer id) {
-    ArticleResponse article = articleService.getArticleById(id);
+  public ResponseEntity<ArticleResponse> getById(@PathVariable Integer id) {
+    ArticleResponse article = articleService.getById(id);
     if (article != null) {
       return new ResponseEntity<>(article, HttpStatus.OK);
     } else {
