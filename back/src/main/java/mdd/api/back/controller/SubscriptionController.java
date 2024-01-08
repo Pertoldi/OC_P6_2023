@@ -25,8 +25,8 @@ public class SubscriptionController {
   private final SubscriptionService subscriptionService;
 
   @GetMapping()
-  public ResponseEntity<List<SubscriptionDto>> getAllSubscriptions() {
-    List<SubscriptionDto> subscriptions = subscriptionService.getAllSubscriptions();
+  public ResponseEntity<List<SubscriptionDto>> getAll() {
+    List<SubscriptionDto> subscriptions = subscriptionService.getAll();
     return ResponseEntity.ok(subscriptions);
   }
 

@@ -39,7 +39,7 @@ public class SubscriptionService {
     return modelMapper.map(subscription, SubscriptionDto.class);
   }
 
-  public List<SubscriptionDto> getAllSubscriptions() {
+  public List<SubscriptionDto> getAll() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     UserDetails userDetails = (UserDetails) authentication.getPrincipal();
     User user = userRepository.findByEmail(userDetails.getUsername())
