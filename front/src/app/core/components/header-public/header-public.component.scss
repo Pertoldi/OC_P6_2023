@@ -1,0 +1,55 @@
+@import '../../../../styles/vars.scss';
+
+.arrow {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  margin: 20px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+}
+
+hr {
+  display: none;
+}
+
+img {
+  width: 200px;
+  justify-self: center;
+  // align-self: center;
+}
+
+
+@media (min-width: $break-point) {
+
+  hr {
+    display: block;
+  }
+
+  img {
+    margin: 0 0 0 30px;
+    // margin-left: 30px;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .arrow {
+    position: absolute;
+    left: 40px;
+    top: 140px;
+  }
+}
