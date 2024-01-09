@@ -10,8 +10,11 @@ export class AuthService {
   }
 
   login(credentials: { email: string; password: string }) {
-    console.log('credentials is :', credentials);
     return this.http.post(`${this.apiUrl}/login`, credentials);
+  }
+
+  register(credentials: { email: string, name: string, password: string }) {
+    return this.http.post(`${this.apiUrl}/register`, credentials);
   }
 
   setToken(token: string) {
