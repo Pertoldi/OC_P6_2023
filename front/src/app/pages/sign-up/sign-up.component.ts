@@ -1,42 +1,43 @@
-import { Component, OnDestroy, OnInit, } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { HeaderPublicComponent } from '../../core/components/header-public/header-public.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../core/services/auth.service';
-import { HeaderPublicComponent } from "../../core/components/header-public/header-public.component";
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../core/services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
-  selector: 'app-sign-in',
+  selector: 'app-sign-up',
   standalone: true,
-  templateUrl: './sign-in.component.html',
-  styleUrl: './sign-in.component.scss',
-  imports: [ReactiveFormsModule, HeaderPublicComponent, MatButtonModule, MatFormFieldModule]
+  imports: [ReactiveFormsModule, HeaderPublicComponent, MatButtonModule],
+  templateUrl: './sign-up.component.html',
+  styleUrl: './sign-up.component.scss'
 })
-export class SignInComponent implements OnInit, OnDestroy {
+export class SignUpComponent implements OnInit, OnDestroy {
+
   private subscription: Subscription = new Subscription();
-  signInForm!: FormGroup;
+  signUpForm!: FormGroup;
 
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initForm();
   }
 
+
   initForm() {
-    this.signInForm = this.formBuilder.group({
+    this.signUpForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
   }
 
   onSubmit() {
-    const formValue = this.signInForm.value;
+    const formValue = this.signUpForm.value;
 
-    const loginSubscription = this.authService.login(formValue).subscribe({
+    const registerSubscription = this.authService.register(formValue).subscribe({
       next: (response: any) => {
         const token = response.token;
         this.authService.setToken(token);
@@ -44,10 +45,9 @@ export class SignInComponent implements OnInit, OnDestroy {
       error: (error) => {
         //TODO a toast
         console.error('Login error:', error);
-      },
-    }
-    );
-    this.subscription.add(loginSubscription);
+      }
+    });
+    this.subscription.add(registerSubscription);
   }
 
   ngOnDestroy(): void {
