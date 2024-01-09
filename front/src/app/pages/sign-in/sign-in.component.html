@@ -1,0 +1,13 @@
+<app-header-public></app-header-public>
+<div class="center">
+  <h1>Se connecter</h1>
+  <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+    <label for="email">E-mail</label>
+    <input type="text" id="email" formControlName="email" required />
+
+    <label for="password">Mot de passe</label>
+    <input type="password" id="password" formControlName="password" required />
+
+    <button mat-raised-button color="primary" type="submit">Se connecter</button>
+  </form>
+</div>

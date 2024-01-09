@@ -1,0 +1,36 @@
+.center {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  margin: 0;
+  margin-bottom: 35px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 25px;
+}
+
+input {
+  border: 1px solid black;
+  width: 100%;
+  margin-top: 4px;
+  height: 45px;
+  border-radius: 10px;
+}
+
+button {
+  border-radius: 8px;
+  width: 150px;
+  margin: 0 auto;
+  margin-top: 40px;
+}
