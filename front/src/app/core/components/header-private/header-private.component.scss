@@ -11,10 +11,15 @@ img {
   justify-self: center;
 }
 
+li {
+  font-size: 1.1rem;
+}
+
 // ------------------------------------
 
 /* MENU BURGER -> checkbox */
-nav {
+.nav-mobile {
+
   transform: scale(0, 1);
   transform-origin: right;
   transition: transform 400ms ease-in-out;
@@ -162,5 +167,43 @@ nav {
 
   &-profile {
     border: 2px solid #7763C5;
+  }
+}
+
+.desktop {
+  display: none;
+}
+
+// ---- desktop ----
+
+@media (min-width: $break-point) {
+  .mobile {
+    display: none;
+  }
+
+
+  .desktop {
+    display: flex;
+  }
+
+  .container {
+    flex-direction: row;
+  }
+
+  .nav-desktop {
+    display: flex;
+
+    ul {
+      display: flex;
+      align-items: center;
+
+      li {
+        margin-right: 12px;
+      }
+    }
+
+    .person {
+      margin-right: 17px;
+    }
   }
 }
