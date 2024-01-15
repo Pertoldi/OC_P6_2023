@@ -1,0 +1,23 @@
+<div class="container">
+  <img src="/assets/logo_p6.png" alt="logo" />
+  <input type="checkbox" id="nav-checkbox" class="nav-checkbox">
+  <!-- checkbox => menuBurger les 3barres sont le label + before + after -->
+  <nav class="menus">
+    <label for="nav-checkbox" class="blur"></label>
+    <div class="burger-menu">
+
+      <ul>
+        <li> <a routerLink="/articles" [class.active]="active==='articles'" (click)="setActive('articles')">Articles</a>
+        </li>
+        <li> <a routerLink="/themes" [class.active]="active==='themes'" (click)="setActive('themes')">Thèmes</a> </li>
+      </ul>
+      <mat-icon class="person person-responsive" routerLink="/profile" [class.active-profile]="active==='profile'"
+        (click)="setActive('profile')">person_outline</mat-icon>
+    </div>
+
+  </nav>
+  <label for="nav-checkbox" class="nav-checkbox-label">
+    <span></span>
+  </label>
+</div>
+<hr>

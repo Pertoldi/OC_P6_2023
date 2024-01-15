@@ -114,6 +114,7 @@ body {
 ol,
 ul {
   list-style: none;
+  box-sizing: border-box;
 }
 
 blockquote,
@@ -143,11 +144,6 @@ input {
 @font-face {
   font-family: 'Inter';
   src: url('/src/asset/Inter-VariableFont_slnt,wght.ttf');
-}
-
-html,
-body {
-  height: 100%;
 }
 
 body {
