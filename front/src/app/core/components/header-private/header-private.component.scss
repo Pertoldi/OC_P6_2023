@@ -1,0 +1,166 @@
+@import '../../../../styles/vars.scss';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+img {
+  width: 150px;
+  justify-self: center;
+}
+
+// ------------------------------------
+
+/* MENU BURGER -> checkbox */
+nav {
+  transform: scale(0, 1);
+  transform-origin: right;
+  transition: transform 400ms ease-in-out;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  color: #000;
+
+  @media (min-width: 888px) {
+    transform: scale(1, 1);
+    position: absolute;
+  }
+
+  a {
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+
+    @media (min-width: 888px) {
+      opacity: 1;
+    }
+  }
+}
+
+.nav-checkbox {
+  display: none;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+
+  &-label {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    height: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+
+    span,
+    span::before,
+    span::after {
+      display: block;
+      background: black;
+      height: 2px;
+      width: 2em;
+      border-radius: 2px;
+      position: relative;
+      transform: translateY(0) rotate(0) scale(1);
+      transition: transform ease-in-out 300ms;
+    }
+
+    span::before {
+      content: "";
+      position: absolute;
+      bottom: 7px;
+      transform: translateY(0) rotate(0);
+      transition: transform ease-in-out 300ms;
+    }
+
+    span::after {
+      content: "";
+      position: absolute;
+      top: 7px;
+      transform: translateY(0) rotate(0);
+      transition: transform ease-in-out 300ms;
+    }
+  }
+
+  &:checked~nav {
+    transform: scale(1, 1);
+    position: absolute;
+  }
+
+  &:checked~nav a {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 250ms;
+  }
+
+  &:checked~label span::before {
+    transform: translateY(7px) rotate(45deg);
+    transition: transform ease-in-out 250ms;
+  }
+
+  &:checked~label span::after {
+    transform: translateY(-7px) rotate(-45deg);
+    transition: transform ease-in-out 250ms;
+  }
+
+  &:checked~label span {
+    background: black;
+  }
+}
+
+/*Fin menu Burger*/
+
+.menus {
+  display: flex;
+  justify-content: flex-end;
+  height: 100vh;
+  width: 100vw;
+
+  .blur {
+    width: 40%;
+    background-color: #eeeeeeee;
+    height: 100vh;
+  }
+
+  .burger-menu {
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 1px solid;
+  }
+
+  ul {
+    align-self: flex-end;
+    margin-right: 20px;
+    margin-top: 120px;
+
+    li {
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+  }
+}
+
+.person {
+  font-size: 50px;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  border-radius: 100px;
+  color: #6D6D6D;
+  background-color: #d9d9d9;
+  border: 2px solid #d9d9d9;
+  align-self: flex-end;
+}
+
+
+.active {
+  color: #7763C5;
+
+  &-profile {
+    border: 2px solid #7763C5;
+  }
+}
