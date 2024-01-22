@@ -5,6 +5,7 @@ import { HeaderPublicComponent } from "../../core/components/header-public/heade
 import { Subscription } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,7 +20,8 @@ export class SignInComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -40,6 +42,7 @@ export class SignInComponent implements OnInit, OnDestroy {
       next: (response: any) => {
         const token = response.token;
         this.authService.setToken(token);
+        this.router.navigate(['articles'])
       },
       error: (error) => {
         //TODO a toast

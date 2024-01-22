@@ -4,11 +4,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../core/services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
+import { HeaderPrivateComponent } from '../../core/components/header-private/header-private.component';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [ReactiveFormsModule, HeaderPublicComponent, MatButtonModule],
+  imports: [ReactiveFormsModule, HeaderPublicComponent, HeaderPrivateComponent, MatButtonModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss'
 })

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+
   apiUrl = `${API_BASE_URL}/auth`;
   constructor(private http: HttpClient) {
 
@@ -25,4 +26,7 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  isAuthenticated() {
+    return true; //TODO
+  }
 }
