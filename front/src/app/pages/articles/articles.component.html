@@ -1,1 +1,15 @@
-<p>articles works!</p>
+<app-header-private></app-header-private>
+<div class="container">
+  <div class="container-btn">
+    <button mat-raised-button color="primary">Créer un articles</button>
+    <div>
+      <span>Trier par</span><mat-icon class="icon-arrow">keyboard_backspace</mat-icon>
+    </div>
+  </div>
+
+  <div class="container-article">
+    <div class="article" *ngFor="let article of articles">
+      <app-articles-component [article]="article"></app-articles-component>
+    </div>
+  </div>
+</div>

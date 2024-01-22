@@ -1,0 +1,64 @@
+@import '../../../styles/vars.scss';
+
+.container {
+  margin: 0 20px;
+
+  &-btn {
+    margin: 25px 0 20px;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      border-radius: 8px;
+      z-index: -1;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .icon-arrow {
+      transform: rotate(-90deg);
+      z-index: -1;
+    }
+  }
+
+  &-article {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .article {
+      width: 48%;
+    }
+  }
+}
+
+
+@media (max-width: $break-point) {
+  .container {
+
+    &-btn {
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      div {
+        margin-top: 20px;
+      }
+    }
+
+    &-article {
+      flex-direction: column;
+      gap: 20px;
+
+      .article {
+        width: 100%;
+      }
+    }
+  }
+}

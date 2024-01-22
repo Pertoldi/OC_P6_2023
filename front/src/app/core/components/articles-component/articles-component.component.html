@@ -1,0 +1,10 @@
+<div (click)="navigateToArticle(article.id)" class="article">
+  <p class="article-title">{{ article.title }}</p>
+  <div class="article-info">
+    <p>{{ article.createdAt | date:'dd/MM/yy' }}</p>
+    <p>{{ article.author.name }}</p>
+  </div>
+  <p class="article-content">
+    {{ article.content }}
+  </p>
+</div>
