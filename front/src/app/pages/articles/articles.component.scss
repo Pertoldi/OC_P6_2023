@@ -10,7 +10,6 @@
 
     button {
       border-radius: 8px;
-      z-index: -1;
     }
 
     div {
@@ -22,7 +21,6 @@
 
     .icon-arrow {
       transform: rotate(-90deg);
-      z-index: -1;
     }
   }
 
@@ -32,7 +30,7 @@
     flex-wrap: wrap;
 
     .article {
-      width: 48%;
+      width: calc((100% - 20px) / 2);
     }
   }
 }

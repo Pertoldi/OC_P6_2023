@@ -1,4 +1,4 @@
-export interface Iarticles {
+export interface IArticles {
   id: number;
   title: string;
   createdAt: Date;
