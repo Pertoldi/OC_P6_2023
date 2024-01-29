@@ -6,6 +6,7 @@ import { ArticlesComponent } from './pages/articles/articles.component';
 import { privateGuard } from './core/guards/private.guard';
 import { ThemesListComponent } from './pages/themes-list/themes-list.component';
 import { ArticleDetailsComponent } from './pages/article-details/article-details.component';
+import { NewArticleComponent } from './pages/new-article/new-article.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,10 @@ export const routes: Routes = [
   {
     path: 'article-details',
     component: ArticleDetailsComponent,
+  },
+  {
+    path: 'new-article',
+    component: NewArticleComponent,
   },
   {
     path: '**',

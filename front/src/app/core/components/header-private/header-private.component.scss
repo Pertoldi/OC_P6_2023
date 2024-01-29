@@ -28,7 +28,7 @@ li {
   top: 0;
   color: #000;
 
-  @media (min-width: 888px) {
+  @media (min-width:$break-point) {
     transform: scale(1, 1);
     position: absolute;
   }
@@ -37,7 +37,7 @@ li {
     opacity: 0;
     transition: opacity 150ms ease-in-out;
 
-    @media (min-width: 888px) {
+    @media (min-width: $break-point) {
       opacity: 1;
     }
   }
