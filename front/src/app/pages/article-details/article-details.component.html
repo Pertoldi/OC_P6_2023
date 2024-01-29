@@ -1,0 +1,32 @@
+<app-header-private></app-header-private>
+<div class="container">
+  <div class="container-title">
+    <mat-icon class="icon-arrow">keyboard_backspace</mat-icon>
+    <h1>{{article.title}}</h1>
+  </div>
+  <div class="container-header">
+    <span>{{article.createdAt | date: 'dd/mm/yy'}}</span>
+    <span>{{article.author.name}}</span>
+    <span>{{theme}}</span>
+  </div>
+  <div class="container-content">
+    {{article.content}}
+  </div>
+  <hr>
+  <h2>Commentaires</h2>
+  <div class="container-comment">
+    <div class="comment" *ngFor="let comment of article.comments">
+      <p class="comment-auth">{{ comment.author.name }}</p>
+      <div class="comment-content">{{ comment.content }}</div>
+    </div>
+  </div>
+</div>
+
+
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="container-form">
+  <div class="wrapper">
+    <textarea placeholder="Écrivez ici votre commentaire" id="comment-area" name="comment-area"
+      formControlName="content" required></textarea>
+    <mat-icon class="submit">send</mat-icon>
+  </div>
+</form>

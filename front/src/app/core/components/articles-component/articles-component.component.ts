@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Iarticles } from './article.model';
+import { IArticles } from './article.model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './articles-component.component.scss'
 })
 export class ArticlesComponentComponent {
-  @Input() article!: Iarticles;
+  @Input() article!: IArticles;
 
   constructor(private router: Router) {
   }

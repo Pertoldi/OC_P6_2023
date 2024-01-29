@@ -19,7 +19,7 @@ li {
 
 /* MENU BURGER -> checkbox */
 .nav-mobile {
-
+  z-index: 999 !important;
   transform: scale(0, 1);
   transform-origin: right;
   transition: transform 400ms ease-in-out;
@@ -50,6 +50,7 @@ li {
   right: 25px;
 
   &-label {
+    z-index: 9999 !important;
     position: absolute;
     top: 25px;
     right: 25px;
@@ -123,7 +124,7 @@ li {
 
   .blur {
     width: 40%;
-    background-color: #eeeeeeee;
+    background-color: rgba($grey-color, 0.8);
     height: 100vh;
   }
 
@@ -163,10 +164,10 @@ li {
 
 
 .active {
-  color: #7763C5;
+  color: $primary-color;
 
   &-profile {
-    border: 2px solid #7763C5;
+    border: 2px solid $primary-color;
   }
 }
 

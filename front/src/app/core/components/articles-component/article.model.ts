@@ -1,4 +1,4 @@
-export interface Iarticles {
+export interface IArticles {
   id: number;
   title: string;
   createdAt: Date;
@@ -6,4 +6,5 @@ export interface Iarticles {
   author: {
     name: string;
   }
+  comments?: Array<any>
 }
