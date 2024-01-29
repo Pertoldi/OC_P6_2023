@@ -4,11 +4,12 @@ import { HeaderPrivateComponent } from '../../core/components/header-private/hea
 import { IArticles } from '../../core/components/articles-component/article.model';
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-article-details',
   standalone: true,
-  imports: [MatIconModule, HeaderPrivateComponent, CommonModule, ReactiveFormsModule],
+  imports: [MatIconModule, HeaderPrivateComponent, CommonModule, ReactiveFormsModule, MatButtonModule],
   templateUrl: './article-details.component.html',
   styleUrl: './article-details.component.scss'
 })

@@ -1,0 +1,18 @@
+<app-header-private></app-header-private>
+<mat-icon class="icon-arrow">keyboard_backspace</mat-icon>
+<div class="container">
+  <h1>Créer un nouvel article</h1>
+
+  <form [formGroup]="newArticleForm" (ngSubmit)="onSubmit()" class="container-form">
+    <select formControlName="theme" required>
+      <option value="" disabled selected hidden>Sélectionner un thème</option>
+      <option *ngFor="let theme of themeList" [value]="theme">{{ theme }}</option>
+    </select>
+
+    <input type="text" formControlName="title" required placeholder="Titre de l'article" />
+
+    <textarea name="content" formControlName="content" id="content" placeholder="Contenu de l'article"></textarea>
+
+    <button mat-raised-button color="primary" type="submit">Créer</button>
+  </form>
+</div>
