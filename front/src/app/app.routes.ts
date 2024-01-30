@@ -7,6 +7,7 @@ import { privateGuard } from './core/guards/private.guard';
 import { ThemesListComponent } from './pages/themes-list/themes-list.component';
 import { ArticleDetailsComponent } from './pages/article-details/article-details.component';
 import { NewArticleComponent } from './pages/new-article/new-article.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,10 @@ export const routes: Routes = [
   {
     path: 'new-article',
     component: NewArticleComponent,
+  },
+  {
+    path: 'user-profile',
+    component: UserProfileComponent,
   },
   {
     path: '**',

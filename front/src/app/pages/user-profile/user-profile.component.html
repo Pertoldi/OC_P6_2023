@@ -1,0 +1,20 @@
+<app-header-private></app-header-private>
+<div class="container">
+
+  <h1>Profil utilisateur</h1>
+
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="container-form">
+    <input type="text" formControlName="name" required placeholder="Username" />
+    <input type="text" formControlName="title" required placeholder="email@email.fr" />
+    <button mat-raised-button color="primary" type="submit">Sauvegarder</button>
+    <span class="disconnect">Se déconnecter</span>
+  </form>
+
+  <hr>
+</div>
+
+<div class="theme-container">
+  <div class="article" *ngFor="let theme of themes">
+    <app-themes [theme]="theme"></app-themes>
+  </div>
+</div>

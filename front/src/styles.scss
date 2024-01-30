@@ -144,7 +144,8 @@ select {
 
 @font-face {
   font-family: 'Inter';
-  src: url('/src/asset/Inter-VariableFont_slnt,wght.ttf');
+  // src: url('/src/assets/Inter-VariableFont_slnt,wght.ttf');
+  src: url('./assets/Inter-VariableFont_slnt\,wght.ttf');
 }
 
 body {
