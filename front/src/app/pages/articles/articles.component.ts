@@ -4,13 +4,14 @@ import { HeaderPrivateComponent } from '../../core/components/header-private/hea
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-articles',
   standalone: true,
   templateUrl: './articles.component.html',
   styleUrl: './articles.component.scss',
-  imports: [ArticlesComponentComponent, CommonModule, HeaderPrivateComponent, MatButtonModule, MatIconModule]
+  imports: [ArticlesComponentComponent, CommonModule, HeaderPrivateComponent, MatButtonModule, MatIconModule, RouterLink]
 })
 export class ArticlesComponent {
   articles = [

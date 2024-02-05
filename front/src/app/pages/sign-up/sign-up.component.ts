@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../core/services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -18,6 +19,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   signUpForm!: FormGroup;
 
   constructor(
+    private router: Router,
     private authService: AuthService,
     private formBuilder: FormBuilder
   ) { }
@@ -29,6 +31,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.signUpForm = this.formBuilder.group({
+      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
@@ -41,6 +44,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
       next: (response: any) => {
         const token = response.token;
         this.authService.setToken(token);
+        this.router.navigate(['/signin']);
       },
       error: (error) => {
         //TODO a toast
