@@ -31,14 +31,12 @@ public class SubjectService {
     return modelMapper.map(subject, SubjectDto.class);
   }
 
-  public Map<String, List<SubjectDto>> getAll() {
+  // public Map<String, List<SubjectDto>> getAll() {
+  public List<SubjectDto> getAll() {
     List<Subject> subjects = subjectRepository.findAll();
-    List<SubjectDto> subjectDtos = subjects.stream()
+    List<SubjectDto> response = subjects.stream()
         .map(this::mapToSubjectDto)
         .collect(Collectors.toList());
-
-    Map<String, List<SubjectDto>> response = new HashMap<>();
-    response.put("subjects", subjectDtos);
 
     return response;
   }

@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatButtonModule } from '@angular/material/button';
 import { ITheme } from '../../core/components/themes/theme.model';
 import { ThemesComponent } from '../../core/components/themes/themes.component';
+import { AuthService } from '../../core/services/auth.service';
+import { SubjectsService } from '../../core/services/subjects.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -18,30 +20,44 @@ export class UserProfileComponent implements OnInit {
   themes: ITheme[] = [
     {
       id: 1,
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
       title: "Java",
       isSubscribe: true
+
     },
     {
       id: 2,
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
       title: "PHP",
       isSubscribe: true
+
     },
     {
       id: 2,
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
       title: "PHP",
       isSubscribe: true
+
     }
   ];
 
   constructor(
     private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private subjectsService: SubjectsService,
   ) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.subjectsService.getAll().subscribe({
+      next: (response: any) => {
+        // TODO ajouter description aux theme  
+      },
+      error: (error) => {
+        //TODO a toast
+        console.error('Login error:', error);
+      }
+    })
   }
 
   initForm() {
@@ -53,5 +69,9 @@ export class UserProfileComponent implements OnInit {
 
   onSubmit() {
 
+  }
+
+  diconnect() {
+    this.authService.disconnect()
   }
 }
