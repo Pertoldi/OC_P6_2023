@@ -40,7 +40,7 @@ export const routes: Routes = [
     component: NewArticleComponent,
   },
   {
-    path: 'user-profile',
+    path: 'profile',
     component: UserProfileComponent,
   },
   {
