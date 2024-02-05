@@ -26,7 +26,17 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  getMe() {
+    return this.http.get(`${this.apiUrl}/me`);
+  }
+
   isAuthenticated() {
-    return true; //TODO
+    const token = this.getToken()
+    return !!token;
+  }
+
+  disconnect() {
+    localStorage.removeItem('token');
+
   }
 }

@@ -21,7 +21,7 @@ public class SubjectController {
   private final SubjectService subjectService;
 
   @GetMapping
-  public Map<String, List<SubjectDto>> getAll() {
+  public List<SubjectDto> getAll() {
     return subjectService.getAll();
   }
 
