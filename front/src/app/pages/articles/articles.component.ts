@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ArticlesService } from '../../core/services/articles.service';
+import { IArticles } from '../../core/model/articles.model';
 
 @Component({
   selector: 'app-articles',
@@ -28,26 +29,6 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   }
 
   articles: any[] = []
-  //  [
-  //   {
-  //     id: 1,
-  //     title: 'Titre',
-  //     createdAt: new Date(),
-  //     content: 'Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled... lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble',
-  //     author: {
-  //       name: 'Toto',
-  //     }
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Titre 2',
-  //     createdAt: new Date(),
-  //     content: 'Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled... lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramble',
-  //     author: {
-  //       name: 'Toto',
-  //     }
-  //   }
-  // ];
 
   ngOnInit(): void {
     const articlesSubscription = this.articlesService.getAll().subscribe({

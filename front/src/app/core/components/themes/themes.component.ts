@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { ITheme } from '../../model/theme.model';
 import { MatButtonModule } from '@angular/material/button';
+import { SubscriptionService } from './../../services/subscription.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-themes',
@@ -9,15 +11,27 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './themes.component.html',
   styleUrl: './themes.component.scss'
 })
-export class ThemesComponent {
+export class ThemesComponent implements OnDestroy {
   @Input() theme!: ITheme;
+  private subscription = new Subscription();
 
   constructor(
-    // private 
+    private subscriptionService: SubscriptionService
   ) { }
 
-  subscribe() {
-
+  subscribeUnsubscribe() {
+    if (!!this.theme.isSubscribe) {
+      const subUnsub = this.subscriptionService.unsubscribe(this.theme.id).subscribe();
+      this.subscription.add(subUnsub);
+    }
+    else {
+      const subSub = this.subscriptionService.subscribe(this.theme.id).subscribe()
+      this.subscription.add(subSub);
+    }
   }
 
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }
