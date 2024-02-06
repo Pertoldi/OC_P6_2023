@@ -4,9 +4,9 @@
   <h1>Créer un nouvel article</h1>
 
   <form [formGroup]="newArticleForm" (ngSubmit)="onSubmit()" class="container-form">
-    <select formControlName="theme" required>
+    <select formControlName="subjectId" required *ngIf="subjects.length > 0">
       <option value="" disabled selected hidden>Sélectionner un thème</option>
-      <option *ngFor="let theme of themeList" [value]="theme">{{ theme }}</option>
+      <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject['name'] }}</option>
     </select>
 
     <input type="text" formControlName="title" required placeholder="Titre de l'article" />

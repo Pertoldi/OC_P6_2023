@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
@@ -5,20 +6,15 @@ import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-header-private',
   standalone: true,
-  imports: [MatIconModule, RouterLink],
+  imports: [MatIconModule, RouterLink, CommonModule],
   templateUrl: './header-private.component.html',
   styleUrl: './header-private.component.scss'
 })
 export class HeaderPrivateComponent {
 
-  active = this.router.url.split('/')[0];
+  active = ''
 
   constructor(private router: Router) {
-
-    console.log('active is :', this.active)
+    this.active = this.router.url.split('/')[0];
   }
-
-  setActive(label: string) {
-  }
-
 }

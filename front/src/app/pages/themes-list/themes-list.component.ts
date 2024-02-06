@@ -15,19 +15,19 @@ export class ThemesListComponent {
   themes: ITheme[] = [
     {
       id: 1,
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
       title: "Java",
       isSubscribe: false
     },
     {
       id: 2,
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
       title: "PHP",
       isSubscribe: false
     },
     {
       id: 2,
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
       title: "Javascript",
       isSubscribe: false
     }

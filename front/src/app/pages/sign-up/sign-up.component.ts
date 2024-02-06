@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit, OnDestroy {
 
-  private subscription: Subscription = new Subscription();
+  private subscription = new Subscription();
   signUpForm!: FormGroup;
 
   constructor(
