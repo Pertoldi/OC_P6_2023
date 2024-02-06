@@ -37,6 +37,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       next: (response: any) => {
         this.themes = response.map((subject: ITheme) => {
           subject.isSubscribe = true;
+          subject.showButton = true;
           return subject
         })
       },
@@ -71,6 +72,5 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.themes = this.themes.filter(theme => {
       return theme.id !== id
     })
-
   }
 }

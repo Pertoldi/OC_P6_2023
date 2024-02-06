@@ -29,4 +29,11 @@ export class SubscriptionService {
     const headers = getHeader(token);
     return this.http.delete(`${this.apiUrl}/${subjectId}`, { headers })
   }
+
+  getAll() {
+    const token = this.authService.getToken();
+
+    const headers = getHeader(token);
+    return this.http.get(`${this.apiUrl}`, { headers })
+  }
 }
