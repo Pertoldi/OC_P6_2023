@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HeaderPrivateComponent } from '../../core/components/header-private/header-private.component';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -8,6 +8,7 @@ import { ThemesComponent } from '../../core/components/themes/themes.component';
 import { AuthService } from '../../core/services/auth.service';
 import { SubjectsService } from '../../core/services/subjects.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,9 +17,11 @@ import { Router } from '@angular/router';
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss'
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnDestroy {
   profileForm!: FormGroup;
   themes: ITheme[] = [];
+  private subscription = new Subscription();
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,7 +32,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.subjectsService.getById().subscribe({
+    const subjectSubscription = this.subjectsService.getById().subscribe({
       next: (response: any) => {
         this.themes = response.map((subject: ITheme) => {
           subject.isSubscribe = true;
@@ -41,6 +44,7 @@ export class UserProfileComponent implements OnInit {
         console.error('Login error:', error);
       }
     })
+    this.subscription.add(subjectSubscription)
   }
 
   initForm() {
@@ -57,5 +61,9 @@ export class UserProfileComponent implements OnInit {
   diconnect() {
     this.authService.disconnect()
     this.router.navigate(['/'])
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
