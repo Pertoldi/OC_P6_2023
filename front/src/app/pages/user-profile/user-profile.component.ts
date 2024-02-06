@@ -3,10 +3,11 @@ import { HeaderPrivateComponent } from '../../core/components/header-private/hea
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { ITheme } from '../../core/components/themes/theme.model';
+import { ITheme } from '../../core/model/theme.model';
 import { ThemesComponent } from '../../core/components/themes/themes.component';
 import { AuthService } from '../../core/services/auth.service';
 import { SubjectsService } from '../../core/services/subjects.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,41 +18,23 @@ import { SubjectsService } from '../../core/services/subjects.service';
 })
 export class UserProfileComponent implements OnInit {
   profileForm!: FormGroup;
-  themes: ITheme[] = [
-    {
-      id: 1,
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
-      title: "Java",
-      isSubscribe: true
-
-    },
-    {
-      id: 2,
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
-      title: "PHP",
-      isSubscribe: true
-
-    },
-    {
-      id: 2,
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis maxime aperiam rerum soluta quae! Dicta aperiam magnam dolor facilis molestias voluptatum vero maiores! Non dolorum saepe explicabo ipsam nostrum odit.",
-      title: "PHP",
-      isSubscribe: true
-
-    }
-  ];
+  themes: ITheme[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private subjectsService: SubjectsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.initForm();
-    this.subjectsService.getAll().subscribe({
+    this.subjectsService.getById().subscribe({
       next: (response: any) => {
-        // TODO ajouter description aux theme  
+        this.themes = response.map((subject: ITheme) => {
+          subject.isSubscribe = true;
+          return subject
+        })
       },
       error: (error) => {
         //TODO a toast
@@ -73,5 +56,6 @@ export class UserProfileComponent implements OnInit {
 
   diconnect() {
     this.authService.disconnect()
+    this.router.navigate(['/'])
   }
 }

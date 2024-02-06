@@ -18,11 +18,11 @@ export class SubjectsService {
 
   ) { }
 
-  getById(theme: string) {
+  getById() {
     const token = this.authService.getToken();
 
-    const header = getHeader(token);
-    // return this.http.get(`${apiUrl}/`)
+    const headers = getHeader(token);
+    return this.http.get(`${this.apiUrl}/user`, { headers })
   }
 
   getAll() {

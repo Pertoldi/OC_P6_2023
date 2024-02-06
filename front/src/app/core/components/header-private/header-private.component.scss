@@ -15,6 +15,10 @@ li {
   font-size: 1.1rem;
 }
 
+mat-icon {
+  cursor: pointer;
+}
+
 // ------------------------------------
 
 /* MENU BURGER -> checkbox */
@@ -58,6 +62,7 @@ li {
     text-align: center;
     display: flex;
     align-items: center;
+    cursor: pointer;
 
     span,
     span::before,
@@ -200,6 +205,7 @@ li {
 
       li {
         margin-right: 12px;
+        cursor: pointer;
       }
     }
 

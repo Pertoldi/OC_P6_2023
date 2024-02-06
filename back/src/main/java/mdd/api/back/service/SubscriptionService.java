@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
+import mdd.api.back.dto.SubjectDto;
 import mdd.api.back.dto.SubscriptionDto;
 import mdd.api.back.model.Subject;
 import mdd.api.back.model.Subscription;

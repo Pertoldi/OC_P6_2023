@@ -1,14 +1,18 @@
 package mdd.api.back.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import mdd.api.back.dto.AuthResponseDto;
+import mdd.api.back.dto.UserUpdateDto;
 import mdd.api.back.model.User;
 import mdd.api.back.request.LoginRequest;
 import mdd.api.back.request.RegisterRequest;
@@ -34,6 +38,17 @@ public class AuthenticationController {
   @PostMapping("/login")
   public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest request) {
     return ResponseEntity.ok(authenticationService.login(request));
+  }
+
+  @PutMapping(value = "me")
+  public ResponseEntity<AuthResponseDto> updateProfile(@RequestBody UserUpdateDto request) {
+    AuthResponseDto updateResult = authenticationService.updateProfile(request);
+
+    if (updateResult == null) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    return ResponseEntity.ok(updateResult);
   }
 
   @GetMapping("/me")

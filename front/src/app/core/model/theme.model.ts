@@ -1,6 +1,6 @@
 export interface ITheme {
   id: number;
-  title: string;
+  name: string;
   description: string;
   isSubscribe: boolean;
 }
