@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ITheme } from './theme.model';
+import { ITheme } from '../../model/theme.model';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -12,5 +12,12 @@ import { MatButtonModule } from '@angular/material/button';
 export class ThemesComponent {
   @Input() theme!: ITheme;
 
+  constructor(
+    // private 
+  ) { }
+
+  subscribe() {
+
+  }
 
 }

@@ -1,8 +1,6 @@
 package mdd.api.back.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -12,12 +10,18 @@ import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import mdd.api.back.dto.SubjectDto;
 import mdd.api.back.model.Subject;
+import mdd.api.back.model.Subscription;
+import mdd.api.back.model.User;
 import mdd.api.back.repository.SubjectRepository;
+import mdd.api.back.repository.SubscriptionRepository;
+import mdd.api.back.repository.UserRepository;
 
 @Service
 @AllArgsConstructor
 public class SubjectService {
   private final SubjectRepository subjectRepository;
+  private final SubscriptionRepository subscriptionRepository;
+  private final UserRepository userRepository;
   private final ModelMapper modelMapper;
 
   @PostConstruct
@@ -47,5 +51,22 @@ public class SubjectService {
       return mapToSubjectDto(subject);
     }
     return null;
+  }
+
+  public List<SubjectDto> getAllSubjectsByUserId(Integer userId) {
+    // Retrieve the user based on the provided user ID
+    User user = userRepository.findById(userId)
+        .orElseThrow(() -> new RuntimeException("User not found"));
+
+    // Retrieve subscriptions for the user
+    List<Subscription> userSubscriptions = subscriptionRepository.findByUser(user);
+
+    // Extract subjects from subscriptions
+    List<SubjectDto> subjects = userSubscriptions.stream()
+        .map(Subscription::getSubject)
+        .map(subject -> modelMapper.map(subject, SubjectDto.class))
+        .collect(Collectors.toList());
+
+    return subjects;
   }
 }

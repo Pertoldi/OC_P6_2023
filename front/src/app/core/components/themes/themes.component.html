@@ -1,7 +1,8 @@
 <div class="container">
-  <p class="container-title">{{ theme.title }}</p>
+  <p class="container-title">{{ theme.name }}</p>
   <p class="container-content">
     {{ theme.description }}
   </p>
-  <button mat-raised-button color="primary">{{theme.isSubscribe ? "Se désabonner" : "S'abonner"}}</button>
+  <button mat-raised-button color="primary" (click)="subscribe()">{{theme.isSubscribe ? "Se désabonner" :
+    "S'abonner"}}</button>
 </div>

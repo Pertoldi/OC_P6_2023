@@ -1,7 +1,7 @@
 <app-header-private></app-header-private>
 <div class="container">
 
-  <h1>Profil utilisateur</h1>
+  <h1 class="h1">Profil utilisateur</h1>
 
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="container-form">
     <input type="text" formControlName="name" required placeholder="Username" />
@@ -10,9 +10,12 @@
     <span class="disconnect" (click)="diconnect()">Se déconnecter</span>
   </form>
 
+  <!-- TODO faire une route pour modifier son email et / ou son username
+  Ajouter une message de retour en cs de mail déjà vallid -->
+
   <hr>
 </div>
-
+<h2 class="h1 h2">Abonnements</h2>
 <div class="theme-container">
   <div class="article" *ngFor="let theme of themes">
     <app-themes [theme]="theme"></app-themes>

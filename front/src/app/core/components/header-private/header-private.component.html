@@ -8,11 +8,11 @@
     <div class="burger-menu">
 
       <ul>
-        <li> <a routerLink="/articles" [class.active]="active==='articles'">Articles</a>
+        <li> <a [routerLink]="['/articles']" [class.active]="active==='articles'">Articles</a>
         </li>
-        <li> <a routerLink=" /themes" [class.active]="active==='themes'">Thèmes</a> </li>
+        <li> <a [routerLink]="['/themes']" [class.active]="active==='themes'">Thèmes</a> </li>
       </ul>
-      <mat-icon class=" person" routerLink="/profile"
+      <mat-icon class=" person" [routerLink]="['/profile']"
         [class.active-profile]="active==='profile'">person_outline</mat-icon>
     </div>
 

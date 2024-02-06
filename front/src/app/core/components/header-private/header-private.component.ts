@@ -15,6 +15,10 @@ export class HeaderPrivateComponent {
   active = ''
 
   constructor(private router: Router) {
-    this.active = this.router.url.split('/')[0];
+    this.active = this.router.url.split('/').join('');
+  }
+
+  test() {
+    console.log('TEST')
   }
 }
