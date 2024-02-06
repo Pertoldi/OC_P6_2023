@@ -18,6 +18,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './user-profile.component.scss'
 })
 export class UserProfileComponent implements OnInit, OnDestroy {
+
   profileForm!: FormGroup;
   themes: ITheme[] = [];
   private subscription = new Subscription();
@@ -40,7 +41,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         })
       },
       error: (error) => {
-        //TODO a toast
         console.error('Login error:', error);
       }
     })
@@ -65,5 +65,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  handleSignalKill(id: number) {
+    this.themes = this.themes.filter(theme => {
+      return theme.id !== id
+    })
+
   }
 }

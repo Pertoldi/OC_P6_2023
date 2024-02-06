@@ -18,6 +18,6 @@
 <h2 class="h1 h2">Abonnements</h2>
 <div class="theme-container">
   <div class="article" *ngFor="let theme of themes">
-    <app-themes [theme]="theme"></app-themes>
+    <app-themes (signalKill)="handleSignalKill(theme.id)" [theme]="theme"></app-themes>
   </div>
 </div>

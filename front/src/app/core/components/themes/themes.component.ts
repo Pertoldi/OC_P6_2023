@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { ITheme } from '../../model/theme.model';
 import { MatButtonModule } from '@angular/material/button';
 import { SubscriptionService } from './../../services/subscription.service';
@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class ThemesComponent implements OnDestroy {
   @Input() theme!: ITheme;
+  @Output() signalKill = new EventEmitter<boolean>();
   private subscription = new Subscription();
 
   constructor(
@@ -23,6 +24,7 @@ export class ThemesComponent implements OnDestroy {
     if (!!this.theme.isSubscribe) {
       const subUnsub = this.subscriptionService.unsubscribe(this.theme.id).subscribe();
       this.subscription.add(subUnsub);
+      this.signalKill.emit(true)
     }
     else {
       const subSub = this.subscriptionService.subscribe(this.theme.id).subscribe()
