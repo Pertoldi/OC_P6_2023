@@ -56,7 +56,6 @@ export class NewArticleComponent implements OnInit {
         this.router.navigate(['/articles']);
       },
       error: (error: any) => {
-        //TODO a toast
         console.error('Login error:', error);
       }
     });
