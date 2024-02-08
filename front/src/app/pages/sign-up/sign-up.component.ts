@@ -47,7 +47,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
         this.router.navigate(['/signin']);
       },
       error: (error) => {
-        //TODO a toast
         console.error('Login error:', error);
       }
     });
