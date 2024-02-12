@@ -9,7 +9,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     importProvidersFrom(HttpClientModule)
   ]
-
 };
 
 export const API_BASE_URL = 'http://localhost:3001/api';

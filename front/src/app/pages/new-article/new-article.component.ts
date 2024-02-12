@@ -23,6 +23,13 @@ export class NewArticleComponent implements OnInit {
 
   subjects: any[] = [];
 
+  // TODO typer tous les any
+  // TODO Ajouter tous les retour de fonctions
+  // private Integer id;
+  // private String name;
+  // private String description;
+  // private LocalDateTime created_at;
+  // private LocalDateTime updated_at;
   constructor(
     private articlesService: ArticlesService,
     private subjectsService: SubjectsService,
@@ -30,17 +37,23 @@ export class NewArticleComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initForm();
     this.subjectsService.getAll().subscribe({
       next: (response: any) => {
-        this.subjects = response
+        // private Integer id;
+        // private String name;
+        // private String description;
+        // private LocalDateTime created_at;
+        // private LocalDateTime updated_at;
+        this.subjects = response;
       },
       error: (error) => {
+        // TODO afficher un message d'erreur
       }
     });
   }
-  initForm() {
+  initForm(): void {
     this.newArticleForm = this.formBuilder.group({
       subjectId: [0, [Validators.required]],
       title: ['', [Validators.required]],
@@ -48,9 +61,8 @@ export class NewArticleComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const formValue = this.newArticleForm.value;
-    console.log('formValue is :', formValue)
     const registerSubscription = this.articlesService.create(formValue).subscribe({
       next: (response: any) => {
         this.router.navigate(['/articles']);

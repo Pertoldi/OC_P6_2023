@@ -17,7 +17,6 @@ export class ArticlesComponentComponent {
   }
 
   navigateToArticle(id: number) {
-    console.log(JSON.stringify(this.article));
-    // this.router.navigate(['/article/' + id]);
+    this.router.navigate(['/article/' + id]); // TODO 
   }
 }

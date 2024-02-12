@@ -28,12 +28,12 @@ export class ArticlesComponent implements OnInit, OnDestroy {
 
   }
 
-  articles: any[] = []
+  articles: any[] = [];
 
   ngOnInit(): void {
     const articlesSubscription = this.articlesService.getAll().subscribe({
       next: (response: any) => {
-        this.articles = response
+        this.articles = response;
       },
       error: (error) => {
       }

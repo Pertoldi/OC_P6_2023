@@ -20,20 +20,20 @@ export class SubscriptionService {
     const token = this.authService.getToken();
 
     const headers = getHeader(token);
-    return this.http.post(`${this.apiUrl}`, { subjectId }, { headers })
+    return this.http.post(`${this.apiUrl}`, { subjectId }, { headers });
   }
 
   unsubscribe(subjectId: number) {
     const token = this.authService.getToken();
 
     const headers = getHeader(token);
-    return this.http.delete(`${this.apiUrl}/${subjectId}`, { headers })
+    return this.http.delete(`${this.apiUrl}/${subjectId}`, { headers });
   }
 
   getAll() {
     const token = this.authService.getToken();
 
     const headers = getHeader(token);
-    return this.http.get(`${this.apiUrl}`, { headers })
+    return this.http.get(`${this.apiUrl}`, { headers });
   }
 }

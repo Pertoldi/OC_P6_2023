@@ -5,5 +5,5 @@ export function getHeader(token: string | null) {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`
   });
-  return headers
+  return headers;
 }

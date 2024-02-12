@@ -37,7 +37,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const formValue = this.signUpForm.value;
 
     const registerSubscription = this.authService.register(formValue).subscribe({
@@ -46,8 +46,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
         this.authService.setToken(token);
         this.router.navigate(['/signin']);
       },
-      error: (error) => {
-        console.error('Login error:', error);
+      error: (error: any) => {
+        console.error('Login error:', error); // TODO toast
       }
     });
     this.subscription.add(registerSubscription);

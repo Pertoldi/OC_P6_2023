@@ -29,10 +29,9 @@ export class ThemesListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const subjectsSubscription = this.subjectsService.getAll().subscribe({
       next: (response: any) => {
-        this.themes = response
+        this.themes = response;
         const subscriptionService = this.subscriptionService.getAll().subscribe({
           next: (response: any) => {
-            console.log('response is :', response)
             const themeIdsubscribe = response.map((subscription: { subjectId: number; }) => subscription.subjectId);
             this.themes.forEach(theme => {
               if (themeIdsubscribe.includes(theme.id)) theme.showButton = false;
@@ -40,14 +39,14 @@ export class ThemesListComponent implements OnInit, OnDestroy {
             })
           },
           error: (error: any) => {
-            console.error('error is :', error)
+            console.error('error is :', error) // TODO
 
           }
         })
-        this.subscription.add(subscriptionService)
+        this.subscription.add(subscriptionService);
       },
       error: (error) => {
-        console.error('error is :', error)
+        console.error('error is :', error) //TODO
       }
     });
     this.subscription.add(subjectsSubscription);

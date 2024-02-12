@@ -38,39 +38,39 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.themes = response.map((subject: ITheme) => {
           subject.isSubscribe = true;
           subject.showButton = true;
-          return subject
+          return subject;
         })
       },
       error: (error) => {
-        console.error('Login error:', error);
+        console.error('Login error:', error); // TODO
       }
     })
-    this.subscription.add(subjectSubscription)
+    this.subscription.add(subjectSubscription);
   }
 
-  initForm() {
+  initForm(): void {
     this.profileForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
   }
 
-  diconnect() {
-    this.authService.disconnect()
-    this.router.navigate(['/'])
+  diconnect(): void {
+    this.authService.disconnect();
+    this.router.navigate(['/']);
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  handleSignalKill(id: number) {
+  handleSignalKill(id: number): void {
     this.themes = this.themes.filter(theme => {
-      return theme.id !== id
+      return theme.id !== id;
     })
   }
 }

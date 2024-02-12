@@ -20,11 +20,10 @@ export class ArticlesService {
 
 
   create(value: { subjectId: number, title: string, content: string }) {
-    console.log('value is :', value)
     const token = this.authService.getToken();
     const headers = getHeader(token);
 
-    return this.http.post(`${this.apiUrl}`, { title: value.title, content: value.content, subjectId: value.subjectId }, { headers })
+    return this.http.post(`${this.apiUrl}`, { title: value.title, content: value.content, subjectId: value.subjectId }, { headers });
 
   }
 

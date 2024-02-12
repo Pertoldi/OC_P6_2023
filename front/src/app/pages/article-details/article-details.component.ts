@@ -41,15 +41,14 @@ export class ArticleDetailsComponent {
         },
       },
     ]
-  }
+  };
 
-  theme = 'PHP'
+  theme = 'PHP';
 
   commentForm!: FormGroup;
 
   onSubmit() {
     const formValue = this.commentForm.value;
-    console.log('formValue is :', formValue)
-
+    // TODO ICI
   }
 }
