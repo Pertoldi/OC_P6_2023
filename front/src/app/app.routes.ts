@@ -32,7 +32,7 @@ export const routes: Routes = [
     component: ThemesListComponent,
   },
   {
-    path: 'article-details',
+    path: 'article/:id',
     component: ArticleDetailsComponent,
   },
   {

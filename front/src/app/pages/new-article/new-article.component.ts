@@ -53,6 +53,7 @@ export class NewArticleComponent implements OnInit {
       }
     });
   }
+
   initForm(): void {
     this.newArticleForm = this.formBuilder.group({
       subjectId: [0, [Validators.required]],
@@ -68,7 +69,7 @@ export class NewArticleComponent implements OnInit {
         this.router.navigate(['/articles']);
       },
       error: (error: any) => {
-        console.error('Login error:', error);
+        console.error('Login error:', error); //TODO
       }
     });
     this.subscription.add(registerSubscription);
