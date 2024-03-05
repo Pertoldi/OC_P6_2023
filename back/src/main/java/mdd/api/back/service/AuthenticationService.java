@@ -1,5 +1,6 @@
 package mdd.api.back.service;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -72,7 +73,8 @@ public class AuthenticationService {
 
     // Update the user's information
     if (request.getName() != null) {
-      if (isValidEmail(request.getName())) {
+      Optional<User> userEmail = userRepository.findByEmail(userDetails.getUsername());
+      if (isValidEmail(request.getEmail()) && !userEmail.isPresent()) {
         user.setName(request.getName());
         user.setEmail(request.getEmail());
       } else {
