@@ -13,9 +13,7 @@ export class ArticlesService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService,
-    private subjectsService: SubjectsService
-
+    private authService: AuthService
   ) { }
 
 
@@ -29,10 +27,15 @@ export class ArticlesService {
 
   getAll() {
     const token = this.authService.getToken();
-
     const headers = getHeader(token);
+
     return this.http.get(`${this.apiUrl}`, { headers });
   }
 
-  getbyId() { }
+  getbyId(id: string) {
+    const token = this.authService.getToken();
+    const headers = getHeader(token);
+
+    return this.http.get(`${this.apiUrl}/${id}`, { headers });
+  }
 }

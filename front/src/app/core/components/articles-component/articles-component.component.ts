@@ -17,6 +17,6 @@ export class ArticlesComponentComponent {
   }
 
   navigateToArticle(id: number) {
-    this.router.navigate(['/article/' + id]); // TODO 
+    this.router.navigate(['/article', id]);
   }
 }
