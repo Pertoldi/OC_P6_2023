@@ -41,15 +41,10 @@ export class NewArticleComponent implements OnInit {
     this.initForm();
     this.subjectsService.getAll().subscribe({
       next: (response: any) => {
-        // private Integer id;
-        // private String name;
-        // private String description;
-        // private LocalDateTime created_at;
-        // private LocalDateTime updated_at;
         this.subjects = response;
       },
       error: (error) => {
-        // TODO afficher un message d'erreur
+        console.error(error);
       }
     });
   }
@@ -69,7 +64,7 @@ export class NewArticleComponent implements OnInit {
         this.router.navigate(['/articles']);
       },
       error: (error: any) => {
-        console.error('Login error:', error); //TODO
+        console.error('Login error:', error);
       }
     });
     this.subscription.add(registerSubscription);

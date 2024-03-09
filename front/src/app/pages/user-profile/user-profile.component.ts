@@ -51,12 +51,20 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   initForm(): void {
     this.profileForm = this.formBuilder.group({
       name: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]], // TODO mettre placeholder avec les data actuelles
     });
   }
 
   onSubmit(): void {
-
+    const formValue = this.profileForm.value;
+    this.subscription.add(this.authService.updateProfile(formValue).subscribe({
+      next: (response: any) => {
+        this.router.navigate(['/articles']);
+      },
+      error: (error: any) => {
+        console.error(error);
+      }
+    }))
   }
 
   diconnect(): void {
