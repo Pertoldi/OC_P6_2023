@@ -39,14 +39,14 @@ export class ThemesListComponent implements OnInit, OnDestroy {
             })
           },
           error: (error: any) => {
-            console.error('error is :', error) // TODO
+            console.error('error is :', error);
 
           }
         })
         this.subscription.add(subscriptionService);
       },
       error: (error) => {
-        console.error('error is :', error) //TODO
+        console.error('error is :', error);
       }
     });
     this.subscription.add(subjectsSubscription);

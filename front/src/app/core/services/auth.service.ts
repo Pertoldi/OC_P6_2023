@@ -19,6 +19,10 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register`, credentials);
   }
 
+  updateProfile(credentials: { email: string, name: string }) {
+    return this.http.put(`${this.apiUrl}/me`, credentials);
+  }
+
   setToken(token: string): void {
     localStorage.setItem('token', token);
   }

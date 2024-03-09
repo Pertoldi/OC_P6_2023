@@ -6,5 +6,5 @@ export interface IArticles {
   author: {
     name: string;
   }
-  comments?: Array<any>
+  comments?: Array<any>;
 }
