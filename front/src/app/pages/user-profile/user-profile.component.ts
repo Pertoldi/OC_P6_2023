@@ -42,7 +42,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         })
       },
       error: (error) => {
-        console.error('Login error:', error); // TODO
+        console.error('Login error:', error);
       }
     })
     this.subscription.add(subjectSubscription);
@@ -51,8 +51,22 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   initForm(): void {
     this.profileForm = this.formBuilder.group({
       name: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]], // TODO mettre placeholder avec les data actuelles
+      email: ['', [Validators.required, Validators.email]],
     });
+    this.subscription.add(this.authService.getMe().subscribe(
+      {
+        next: (response: any) => {
+          this.profileForm.setValue({
+            name: response.name,
+            email: response.email
+          });
+        },
+        error: (error) => {
+          console.error('Login error:', error);
+        }
+      }
+    ));
+
   }
 
   onSubmit(): void {
