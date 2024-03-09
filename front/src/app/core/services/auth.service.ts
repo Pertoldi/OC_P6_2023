@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { API_BASE_URL } from '../../app.config';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { getHeader } from './header';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -20,7 +21,9 @@ export class AuthService {
   }
 
   updateProfile(credentials: { email: string, name: string }) {
-    return this.http.put(`${this.apiUrl}/me`, credentials);
+    const token = this.getToken();
+    const headers = getHeader(token);
+    return this.http.put(`${this.apiUrl}/me`, credentials, { headers });
   }
 
   setToken(token: string): void {
@@ -32,8 +35,11 @@ export class AuthService {
     return token ? token : "";
   }
 
-  getMe(): Observable<any> { // TYODO changer tout les any
-    return this.http.get(`${this.apiUrl}/me`);
+  getMe(): Observable<any> { // TODO changer tout les any
+    const token = this.getToken();
+    const headers = getHeader(token);
+
+    return this.http.get(`${this.apiUrl}/me`, { headers });
   }
 
   //TODO ajouter les ; PARTOUT
