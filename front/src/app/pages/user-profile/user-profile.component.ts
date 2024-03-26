@@ -41,7 +41,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           return subject;
         })
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Login error:', error);
       }
     })

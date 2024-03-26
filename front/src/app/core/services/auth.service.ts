@@ -11,19 +11,18 @@ export class AuthService {
   constructor(private http: HttpClient) {
 
   }
-
-  login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, credentials);
+  login(credentials: { email: string; password: string }): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, credentials);
   }
 
-  register(credentials: { email: string, name: string, password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, credentials);
+  register(credentials: { email: string, name: string, password: string }): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/register`, credentials);
   }
 
-  updateProfile(credentials: { email: string, name: string }) {
+  updateProfile(credentials: { email: string, name: string }): Observable<{ email: string, name: string }> {
     const token = this.getToken();
     const headers = getHeader(token);
-    return this.http.put(`${this.apiUrl}/me`, credentials, { headers });
+    return this.http.put<{ email: string, name: string }>(`${this.apiUrl}/me`, credentials, { headers });
   }
 
   setToken(token: string): void {
@@ -35,11 +34,11 @@ export class AuthService {
     return token ? token : "";
   }
 
-  getMe(): Observable<any> { // TODO changer tout les any
+  getMe(): Observable<{ email: string, name: string }> {
     const token = this.getToken();
     const headers = getHeader(token);
 
-    return this.http.get(`${this.apiUrl}/me`, { headers });
+    return this.http.get<{ email: string, name: string }>(`${this.apiUrl}/me`, { headers });
   }
 
   isAuthenticated(): boolean {
@@ -49,6 +48,5 @@ export class AuthService {
 
   disconnect(): void {
     localStorage.removeItem('token');
-
   }
 }

@@ -6,5 +6,6 @@ export interface IArticles {
   author: {
     name: string;
   }
-  comments?: Array<any>;
+  // comments?: Array<{ id: number; content: string; createdAt: Date; author: { name: string } }>;
+  comments?: any;
 }

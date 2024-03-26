@@ -16,7 +16,7 @@ export class CommentsService {
 
   ) { }
 
-  create(comment: any) {
+  create(comment: { content: string, themeId: number }) {
     const token = this.authService.getToken();
     const headers = getHeader(token);
 

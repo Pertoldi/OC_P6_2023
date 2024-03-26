@@ -23,7 +23,7 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
 
   theme = 'PHP'
 
-  article: any | undefined
+  article: IArticles | undefined
 
   commentForm!: FormGroup;
 
@@ -40,7 +40,8 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     this.id = this.route.snapshot.paramMap.get('id')!;
 
     this.subscription.add(this.articlesService.getbyId(this.id).subscribe({
-      next: (response: any) => {
+      // next: (response: IArticles) => {
+        next: (response: any) => {
         this.article = response
         console.log('response is :', response)
       },
@@ -62,7 +63,7 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
     formValue.articleId = this.id;
     this.subscription.add(this.commentsService.create(formValue).subscribe({
       next: (response) => {
-        this.article.comments.push(response); // TODO check le service ici et ajouter la redirection sur la flêche
+        if (this.article && this.article.comments) this.article.comments.push(response); // TODO check le service ici et ajouter la redirection sur la flêche
       },
       error: (error) => {
         console.error('Login error:', error); // TODO
