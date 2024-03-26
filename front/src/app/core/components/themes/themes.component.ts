@@ -24,7 +24,6 @@ export class ThemesComponent implements OnDestroy {
 
   subscribeUnsubscribe(): void {
     if (!!this.theme.isSubscribe) {
-      // const subUnsub: Subscription =
       this.subscription.add(this.subscriptionService.unsubscribe(this.theme.id).subscribe({
         next: (response: any) => {
           this.signalKill.emit(true);
@@ -33,7 +32,6 @@ export class ThemesComponent implements OnDestroy {
           console.error('Login error:', error);
         }
       }));
-      // this.subscription.add(subUnsub); // TODO refaire les subscriptions comme ici
     }
     else {
       const subSub = this.subscriptionService.subscribe(this.theme.id).subscribe();

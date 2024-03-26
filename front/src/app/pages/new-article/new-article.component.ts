@@ -64,7 +64,7 @@ export class NewArticleComponent implements OnInit {
         this.router.navigate(['/articles']);
       },
       error: (error: any) => {
-        console.error('Login error:', error); //TODO
+        console.error('Login error:', error);
       }
     });
     this.subscription.add(registerSubscription);

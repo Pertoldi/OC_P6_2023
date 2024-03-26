@@ -42,8 +42,6 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/me`, { headers });
   }
 
-  //TODO ajouter les ; PARTOUT
-
   isAuthenticated(): boolean {
     const token = this.getToken();
     return !!token;

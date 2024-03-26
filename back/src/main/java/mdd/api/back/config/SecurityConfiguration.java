@@ -22,13 +22,6 @@ public class SecurityConfiguration {
     private static final String[] ROUTES_WHITE_LIST = {
             "/api/auth/register",
             "/api/auth/login",
-            // "/swagger-ui/**",
-            // "/v3/api-docs",
-            // "/v3/api-docs/**",
-            // "/swagger-resources/**",
-            // "/swagger-ui.html",
-            // "api-docs/**",
-            // "/pictures/**"
     };
 
     @Bean

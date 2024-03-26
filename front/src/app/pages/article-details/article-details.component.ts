@@ -45,7 +45,7 @@ export class ArticleDetailsComponent implements OnInit, OnDestroy {
         console.log('response is :', response)
       },
       error: (error) => {
-        console.error('Login error:', error); // TODO
+        console.error('Login error:', error);
       }
     })
     )
