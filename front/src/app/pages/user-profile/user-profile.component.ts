@@ -9,6 +9,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { SubjectsService } from '../../core/services/subjects.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { User } from '../../core/model/user.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -34,14 +35,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
     const subjectSubscription = this.subjectsService.getById().subscribe({
-      next: (response: any) => {
+      next: (response: ITheme[]) => {
         this.themes = response.map((subject: ITheme) => {
           subject.isSubscribe = true;
           subject.showButton = true;
           return subject;
         })
       },
-      error: (error: any) => {
+      error: (error: unknown) => {
         console.error('Login error:', error);
       }
     })
@@ -55,13 +56,13 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     });
     this.subscription.add(this.authService.getMe().subscribe(
       {
-        next: (response: any) => {
+        next: (response: User) => {
           this.profileForm.setValue({
             name: response.name,
             email: response.email
           });
         },
-        error: (error) => {
+        error: (error: unknown) => {
           console.error('Login error:', error);
         }
       }
@@ -72,10 +73,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     const formValue = this.profileForm.value;
     this.subscription.add(this.authService.updateProfile(formValue).subscribe({
-      next: (response: any) => {
+      next: (response: User) => {
         this.router.navigate(['/articles']);
       },
-      error: (error: any) => {
+      error: (error: unknown) => {
         console.error(error);
       }
     }))

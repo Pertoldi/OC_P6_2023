@@ -3,6 +3,7 @@ import { API_BASE_URL } from '../../app.config';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { getHeader } from './header';
+import { User } from '../model/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -19,10 +20,10 @@ export class AuthService {
     return this.http.post<{ token: string }>(`${this.apiUrl}/register`, credentials);
   }
 
-  updateProfile(credentials: { email: string, name: string }): Observable<{ email: string, name: string }> {
+  updateProfile(credentials: User): Observable<User> {
     const token = this.getToken();
     const headers = getHeader(token);
-    return this.http.put<{ email: string, name: string }>(`${this.apiUrl}/me`, credentials, { headers });
+    return this.http.put<User>(`${this.apiUrl}/me`, credentials, { headers });
   }
 
   setToken(token: string): void {
@@ -34,11 +35,11 @@ export class AuthService {
     return token ? token : "";
   }
 
-  getMe(): Observable<{ email: string, name: string }> {
+  getMe(): Observable<User> {
     const token = this.getToken();
     const headers = getHeader(token);
 
-    return this.http.get<{ email: string, name: string }>(`${this.apiUrl}/me`, { headers });
+    return this.http.get<User>(`${this.apiUrl}/me`, { headers });
   }
 
   isAuthenticated(): boolean {

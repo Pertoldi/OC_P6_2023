@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { getHeader } from './header';
 import { AuthService } from './auth.service';
 import { API_BASE_URL } from '../../app.config';
+import { Observable } from 'rxjs';
+import { ITheme } from '../model/theme.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,21 +17,20 @@ export class SubjectsService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-
   ) { }
 
-  getById() {
+  getById(): Observable<ITheme[]> {
     const token = this.authService.getToken();
 
     const headers = getHeader(token);
-    return this.http.get(`${this.apiUrl}/user`, { headers });
+    return this.http.get<ITheme[]>(`${this.apiUrl}/user`, { headers });
   }
 
-  getAll() {
+  getAll(): Observable<ITheme[]> {
     const token = this.authService.getToken();
 
     const headers = getHeader(token);
 
-    return this.http.get(`${this.apiUrl}`, { headers });
+    return this.http.get<ITheme[]>(`${this.apiUrl}`, { headers });
   }
 }

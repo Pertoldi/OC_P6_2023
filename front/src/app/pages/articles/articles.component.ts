@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ArticlesService } from '../../core/services/articles.service';
-import { IArticles } from '../../core/model/articles.model';
+import { IArticle } from '../../core/model/article.model';
 
 @Component({
   selector: 'app-articles',
@@ -28,11 +28,11 @@ export class ArticlesComponent implements OnInit, OnDestroy {
 
   }
 
-  articles: IArticles[] = [];
+  articles: IArticle[] = [];
 
   ngOnInit(): void {
     const articlesSubscription = this.articlesService.getAll().subscribe({
-      next: (response: any) => {
+      next: (response: IArticle[]) => {
         this.articles = response;
       },
       error: (error) => {

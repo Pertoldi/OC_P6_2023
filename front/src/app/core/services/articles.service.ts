@@ -4,6 +4,8 @@ import { API_BASE_URL } from '../../app.config';
 import { AuthService } from './auth.service';
 import { SubjectsService } from './subjects.service';
 import { getHeader } from './header';
+import { IArticle } from '../model/article.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,25 +19,24 @@ export class ArticlesService {
   ) { }
 
 
-  create(value: { subjectId: number, title: string, content: string }) {
+  create(value: { subjectId: number, title: string, content: string }): Observable<IArticle> {
     const token = this.authService.getToken();
     const headers = getHeader(token);
 
-    return this.http.post(`${this.apiUrl}`, { title: value.title, content: value.content, subjectId: value.subjectId }, { headers });
-
+    return this.http.post<IArticle>(`${this.apiUrl}`, { title: value.title, content: value.content, subjectId: value.subjectId }, { headers });
   }
 
-  getAll() {
+  getAll(): Observable<IArticle[]> {
     const token = this.authService.getToken();
     const headers = getHeader(token);
 
-    return this.http.get(`${this.apiUrl}`, { headers });
+    return this.http.get<IArticle[]>(`${this.apiUrl}`, { headers });
   }
 
-  getbyId(id: string) {
+  getbyId(id: string): Observable<IArticle> {
     const token = this.authService.getToken();
     const headers = getHeader(token);
 
-    return this.http.get(`${this.apiUrl}/${id}`, { headers });
+    return this.http.get<IArticle>(`${this.apiUrl}/${id}`, { headers });
   }
 }

@@ -25,8 +25,7 @@ export class ThemesComponent implements OnDestroy {
   subscribeUnsubscribe(): void {
     if (!!this.theme.isSubscribe) {
       this.subscription.add(this.subscriptionService.unsubscribe(this.theme.id).subscribe({
-        // next: (response: {message: string}) => {
-          next: (response: any) => {
+        next: (response: { message: string }) => {
           this.signalKill.emit(true);
         },
         error: (error) => {

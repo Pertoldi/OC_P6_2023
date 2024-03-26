@@ -13,7 +13,7 @@ export class HeaderPublicComponent {
 
   constructor(private router: Router) { }
 
-  goToHomePage() {
+  goToHomePage(): void {
     this.router.navigate(['']);
   }
 }

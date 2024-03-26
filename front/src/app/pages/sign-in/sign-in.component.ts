@@ -44,7 +44,7 @@ export class SignInComponent implements OnInit, OnDestroy {
         this.authService.setToken(token);
         this.router.navigate(['articles']);
       },
-      error: (error: any) => {
+      error: (error: unknown) => {
         console.error('Login error:', error);
       },
     }

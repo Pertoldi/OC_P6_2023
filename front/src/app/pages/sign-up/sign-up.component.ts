@@ -29,7 +29,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
 
-  initForm() {
+  initForm(): void {
     this.signUpForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -41,12 +41,12 @@ export class SignUpComponent implements OnInit, OnDestroy {
     const formValue = this.signUpForm.value;
 
     const registerSubscription = this.authService.register(formValue).subscribe({
-      next: (response: any) => {
+      next: (response: { token: string }) => {
         const token = response.token;
         this.authService.setToken(token);
         this.router.navigate(['/signin']);
       },
-      error: (error: any) => {
+      error: (error: unknown) => {
         console.error('Login error:', error);
       }
     });

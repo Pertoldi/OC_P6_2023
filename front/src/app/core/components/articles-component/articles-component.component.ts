@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IArticles } from './article.model';
+import { IArticle } from '../../model/article.model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -11,12 +11,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './articles-component.component.scss'
 })
 export class ArticlesComponentComponent {
-  @Input() article!: IArticles;
+  @Input() article!: IArticle;
 
   constructor(private router: Router) {
   }
 
-  navigateToArticle(id: number) {
+  navigateToArticle(id: number): void {
     this.router.navigate(['/article', id]);
   }
 }
