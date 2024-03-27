@@ -20,23 +20,14 @@ export class ArticlesService {
 
 
   create(value: { subjectId: number, title: string, content: string }): Observable<IArticle> {
-    const token = this.authService.getToken();
-    const headers = getHeader(token);
-
-    return this.http.post<IArticle>(`${this.apiUrl}`, { title: value.title, content: value.content, subjectId: value.subjectId }, { headers });
+    return this.http.post<IArticle>(`${this.apiUrl}`, { title: value.title, content: value.content, subjectId: value.subjectId }, { headers: getHeader(this.authService.getToken()) });
   }
 
   getAll(): Observable<IArticle[]> {
-    const token = this.authService.getToken();
-    const headers = getHeader(token);
-
-    return this.http.get<IArticle[]>(`${this.apiUrl}`, { headers });
+    return this.http.get<IArticle[]>(`${this.apiUrl}`, { headers: getHeader(this.authService.getToken()) });
   }
 
   getbyId(id: string): Observable<IArticle> {
-    const token = this.authService.getToken();
-    const headers = getHeader(token);
-
-    return this.http.get<IArticle>(`${this.apiUrl}/${id}`, { headers });
+    return this.http.get<IArticle>(`${this.apiUrl}/${id}`, { headers: getHeader(this.authService.getToken()) });
   }
 }

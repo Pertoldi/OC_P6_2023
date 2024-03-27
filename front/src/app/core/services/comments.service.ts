@@ -19,9 +19,6 @@ export class CommentsService {
   ) { }
 
   create(comment: { content: string, themeId: number }): Observable<IArticle> {
-    const token = this.authService.getToken();
-    const headers = getHeader(token);
-
-    return this.http.post<IArticle>(`${this.apiUrl}`, comment, { headers });
+    return this.http.post<IArticle>(`${this.apiUrl}`, comment, { headers: getHeader(this.authService.getToken()) });
   }
 }

@@ -21,9 +21,7 @@ export class AuthService {
   }
 
   updateProfile(credentials: User): Observable<User> {
-    const token = this.getToken();
-    const headers = getHeader(token);
-    return this.http.put<User>(`${this.apiUrl}/me`, credentials, { headers });
+    return this.http.put<User>(`${this.apiUrl}/me`, credentials, { headers: getHeader(this.getToken()) });
   }
 
   setToken(token: string): void {
@@ -36,10 +34,7 @@ export class AuthService {
   }
 
   getMe(): Observable<User> {
-    const token = this.getToken();
-    const headers = getHeader(token);
-
-    return this.http.get<User>(`${this.apiUrl}/me`, { headers });
+    return this.http.get<User>(`${this.apiUrl}/me`, { headers: getHeader(this.getToken()) });
   }
 
   isAuthenticated(): boolean {

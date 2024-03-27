@@ -13,24 +13,16 @@ export class SubjectsService {
 
   apiUrl = `${API_BASE_URL}/subject`;
 
-
   constructor(
     private http: HttpClient,
     private authService: AuthService
   ) { }
 
   getById(): Observable<ITheme[]> {
-    const token = this.authService.getToken();
-
-    const headers = getHeader(token);
-    return this.http.get<ITheme[]>(`${this.apiUrl}/user`, { headers });
+    return this.http.get<ITheme[]>(`${this.apiUrl}/user`, { headers: getHeader(this.authService.getToken()) });
   }
 
   getAll(): Observable<ITheme[]> {
-    const token = this.authService.getToken();
-
-    const headers = getHeader(token);
-
-    return this.http.get<ITheme[]>(`${this.apiUrl}`, { headers });
+    return this.http.get<ITheme[]>(`${this.apiUrl}`, { headers: getHeader(this.authService.getToken()) });
   }
 }

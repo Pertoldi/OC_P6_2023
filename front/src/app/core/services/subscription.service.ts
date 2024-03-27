@@ -19,23 +19,14 @@ export class SubscriptionService {
   ) { }
 
   subscribe(subjectId: number): Observable<ISubsciption> {
-    const token = this.authService.getToken();
-
-    const headers = getHeader(token);
-    return this.http.post<ISubsciption>(`${this.apiUrl}`, { subjectId }, { headers });
+    return this.http.post<ISubsciption>(`${this.apiUrl}`, { subjectId }, { headers: getHeader(this.authService.getToken()) });
   }
 
   unsubscribe(subjectId: number): Observable<{ message: string }> {
-    const token = this.authService.getToken();
-
-    const headers = getHeader(token);
-    return this.http.delete<{ message: string }>(`${this.apiUrl}/${subjectId}`, { headers });
+    return this.http.delete<{ message: string }>(`${this.apiUrl}/${subjectId}`, { headers: getHeader(this.authService.getToken()) });
   }
 
   getAll(): Observable<ISubsciption[]> {
-    const token = this.authService.getToken();
-
-    const headers = getHeader(token);
-    return this.http.get<ISubsciption[]>(`${this.apiUrl}`, { headers });
+    return this.http.get<ISubsciption[]>(`${this.apiUrl}`, { headers: getHeader(this.authService.getToken()) });
   }
 }
