@@ -10,6 +10,7 @@ import { SubjectsService } from '../../core/services/subjects.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../../core/model/user.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-profile',
@@ -29,7 +30,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private subjectsService: SubjectsService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -77,7 +79,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.router.navigate(['/articles']);
       },
       error: (error: unknown) => {
-        console.error(error);
+        this.snackBar.open('Il y a un problème avec votre mail ou votre nom d\'utilisateur !', 'OK', {
+          duration: 3000
+        });
       }
     }))
   }
