@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import lombok.RequiredArgsConstructor;
 import mdd.api.back.dto.AuthResponseDto;
@@ -31,6 +33,16 @@ public class AuthenticationService {
   private final AuthenticationManager authenticationManager;
 
   public AuthenticationResponse register(RegisterRequest request) {
+
+    String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
+
+    if (!request.getPassword().matches(passwordRegex)) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+          "Password must contain at least one lowercase letter, " +
+              "one uppercase letter, one special character, " +
+              "and be at least 8 characters long.");
+    }
+
     var user = User
         .builder()
         .name(request.getName())
@@ -63,7 +75,6 @@ public class AuthenticationService {
   }
 
   public AuthResponseDto updateProfile(UserUpdateRequest request) {
-    System.out.println("request TEST: " + request);
     // Retrieve the currently authenticated user
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -71,7 +82,6 @@ public class AuthenticationService {
     // email
     User user = userRepository.findByEmail(userDetails.getUsername())
         .orElseThrow(() -> new RuntimeException("User not found"));
-    System.out.println("user: " + user);
 
     // Update the user's information
     if (request.getName() != null) {

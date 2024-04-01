@@ -42,9 +42,7 @@ public class AuthenticationController {
 
   @PutMapping(value = "me")
   public ResponseEntity<AuthResponseDto> updateProfile(@RequestBody UserUpdateRequest request) {
-    System.out.println("request: " + request);
     AuthResponseDto updateResult = authenticationService.updateProfile(request);
-    System.out.println("updateResult: " + updateResult);
 
     if (updateResult == null) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
