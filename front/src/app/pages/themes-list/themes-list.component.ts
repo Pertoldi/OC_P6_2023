@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { SubjectsService } from '../../core/services/subjects.service';
 import { SubscriptionService } from './../../core/services/subscription.service';
+import { ISubsciption } from '../../core/model/subscription.model';
 
 @Component({
   selector: 'app-themes-list',
@@ -27,35 +28,28 @@ export class ThemesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const subjectsSubscription = this.subjectsService.getAll().subscribe({
-      next: (response: any) => {
-        this.themes = response
-        const subscriptionService = this.subscriptionService.getAll().subscribe({
-          next: (response: any) => {
-            console.log('response is :', response)
+    this.subscription.add(this.subjectsService.getAll().subscribe({
+      next: (response: ITheme[]) => {
+        this.themes = response;
+        this.subscription.add(this.subscriptionService.getAll().subscribe({
+          next: (response: ISubsciption[]) => {
             const themeIdsubscribe = response.map((subscription: { subjectId: number; }) => subscription.subjectId);
             this.themes.forEach(theme => {
               if (themeIdsubscribe.includes(theme.id)) theme.showButton = false;
               else theme.showButton = true;
             })
           },
-          error: (error: any) => {
-            console.error('error is :', error)
-
+          error: (error: unknown) => {
+            console.error('error is :', error);
           }
-        })
-        this.subscription.add(subscriptionService)
+        }))
       },
       error: (error) => {
-        console.error('error is :', error)
+        console.error('error is :', error);
       }
-    });
-    this.subscription.add(subjectsSubscription);
-
+    }));
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
-
 }

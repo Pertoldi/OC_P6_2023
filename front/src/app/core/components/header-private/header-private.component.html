@@ -8,16 +8,16 @@
     <div class="burger-menu">
 
       <ul>
-        <li> <a [routerLink]="['/articles']" [class.active]="active==='articles'">Articles</a>
+        <li> <a routerLink="/articles" [class.active]="active==='articles'">Articles</a>
         </li>
-        <li> <a [routerLink]="['/themes']" [class.active]="active==='themes'">Thèmes</a> </li>
+        <li> <a routerLink="/themes" [class.active]="active==='themes'">Thèmes</a> </li>
       </ul>
-      <mat-icon class=" person" [routerLink]="['/profile']"
+      <mat-icon class="person" routerLink="/profile"
         [class.active-profile]="active==='profile'">person_outline</mat-icon>
     </div>
 
   </nav>
-  <label for=" nav-checkbox" class="nav-checkbox-label">
+  <label for="nav-checkbox" class="nav-checkbox-label">
     <span></span>
   </label>
 </div>
@@ -25,12 +25,11 @@
   <img src="/assets/logo_p6.png" alt="logo" />
   <nav class="nav-desktop">
     <ul>
-      <li> <a [routerLink]="['/articles']" [class.active]="active==='articles'">Articles</a>
+      <li> <a routerLink="/articles" [class.active]="active==='articles'">Articles</a>
       </li>
-      <li> <a [routerLink]="['/themes']" [class.active]="active==='themes'">Thèmes</a> </li>
+      <li> <a routerLink="/themes" [class.active]="active==='themes'">Thèmes</a> </li>
     </ul>
-    <mat-icon class=" person" [routerLink]="['/profile']"
-      [class.active-profile]="active==='profile'">person_outline</mat-icon>
+    <mat-icon class="person" routerLink="/profile" [class.active-profile]="active==='profile'">person_outline</mat-icon>
   </nav>
 </div>
 <hr>

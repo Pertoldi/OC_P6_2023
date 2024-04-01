@@ -22,22 +22,19 @@ export class ThemesComponent implements OnDestroy {
   ) {
   }
 
-
-  subscribeUnsubscribe() {
+  subscribeUnsubscribe(): void {
     if (!!this.theme.isSubscribe) {
-      const subUnsub = this.subscriptionService.unsubscribe(this.theme.id).subscribe({
-        next: (response: any) => {
-          this.signalKill.emit(true)
+      this.subscription.add(this.subscriptionService.unsubscribe(this.theme.id).subscribe({
+        next: (response: { message: string }) => {
+          this.signalKill.emit(true);
         },
         error: (error) => {
           console.error('Login error:', error);
         }
-      });
-      this.subscription.add(subUnsub);
+      }));
     }
     else {
-      const subSub = this.subscriptionService.subscribe(this.theme.id).subscribe()
-      this.subscription.add(subSub);
+      this.subscription.add(this.subscriptionService.subscribe(this.theme.id).subscribe());
       this.theme.showButton = false;
     }
   }

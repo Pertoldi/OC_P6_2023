@@ -1,25 +1,43 @@
-# P6-Full-Stack-reseau-dev
+# P6-Développez une application full-stack complète
 
 ## Front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17
 
 Don't forget to install your node_modules before starting (`npm install`).
 
+Dependencies: The external UI library `@angular/materials`.
+
+## Back
+
+set up the MySQL database by running the script `script.sql`. It will create a database named P6.
+
+This project uses java 21 and the following dependencies:
+
+Spring Web -> To build restful API using Spring MVC
+Spring Boot DevTools -> for enhance development experience
+MySQL Driver -> To easily connect and access MySQL data
+Data JPA  -> to improve the data access layers and enhance developer experience
+Lombrok -> to reduce boilerplate code
+Spring Security -> To implement access-control on the Spring Application
+
 ### Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Go to the front folder and run `npm run start` or for a dev server. Navigate to `http://localhost:4200/`. The angular application will automatically reload if you change any of the source files.
+
+To run the back end, on vs-code, use the run button available in the main class BackApplication.
+
 
 ### Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-### Where to start
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+### Content
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
-
-Note: I recommend to use material however it's not mandatory, if you prefer you can get ride of it.
-
-Good luck!
+This application allows people:
+- to connect/disconnect
+- to post articles
+- to comment articles
+- to subscribe/unsubscribe to subject
+- to change userName and Email

@@ -8,6 +8,8 @@ import { Router, RouterLink } from '@angular/router';
 import { ArticlesService } from './../../core/services/articles.service';
 import { Subscription } from 'rxjs';
 import { SubjectsService } from '../../core/services/subjects.service';
+import { ITheme } from '../../core/model/theme.model';
+import { IArticle } from '../../core/model/article.model';
 
 @Component({
   selector: 'app-new-article',
@@ -21,7 +23,7 @@ export class NewArticleComponent implements OnInit {
   private subscription = new Subscription();
 
 
-  subjects: any[] = [];
+  subjects: ITheme[] = [];
 
   constructor(
     private articlesService: ArticlesService,
@@ -30,17 +32,19 @@ export class NewArticleComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initForm();
     this.subjectsService.getAll().subscribe({
-      next: (response: any) => {
-        this.subjects = response
+      next: (response: ITheme[]) => {
+        this.subjects = response;
       },
       error: (error) => {
+        console.error(error);
       }
     });
   }
-  initForm() {
+
+  initForm(): void {
     this.newArticleForm = this.formBuilder.group({
       subjectId: [0, [Validators.required]],
       title: ['', [Validators.required]],
@@ -48,18 +52,17 @@ export class NewArticleComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const formValue = this.newArticleForm.value;
-    console.log('formValue is :', formValue)
-    const registerSubscription = this.articlesService.create(formValue).subscribe({
-      next: (response: any) => {
-        this.router.navigate(['/articles']);
-      },
-      error: (error: any) => {
-        console.error('Login error:', error);
-      }
-    });
-    this.subscription.add(registerSubscription);
+    this.subscription.add(
+      this.articlesService.create(formValue).subscribe({
+        next: (response: IArticle) => {
+          this.router.navigate(['/articles']);
+        },
+        error: (error: unknown) => {
+          console.error('Login error:', error);
+        }
+      }));
   }
 
   ngOnDestroy(): void {

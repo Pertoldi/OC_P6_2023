@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import mdd.api.back.dto.SubjectDto;
 import mdd.api.back.dto.UserDto;
-import mdd.api.back.model.Comment;
 
 @Data
 @Builder

@@ -1,8 +1,10 @@
 package mdd.api.back.service;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -10,14 +12,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import lombok.RequiredArgsConstructor;
 import mdd.api.back.dto.AuthResponseDto;
-import mdd.api.back.dto.UserUpdateDto;
 import mdd.api.back.model.User;
 import mdd.api.back.repository.UserRepository;
 import mdd.api.back.request.LoginRequest;
 import mdd.api.back.request.RegisterRequest;
+import mdd.api.back.request.UserUpdateRequest;
 import mdd.api.back.response.AuthenticationResponse;
 
 @Service
@@ -30,6 +33,16 @@ public class AuthenticationService {
   private final AuthenticationManager authenticationManager;
 
   public AuthenticationResponse register(RegisterRequest request) {
+
+    String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
+
+    if (!request.getPassword().matches(passwordRegex)) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+          "Password must contain at least one lowercase letter, " +
+              "one uppercase letter, one special character, " +
+              "and be at least 8 characters long.");
+    }
+
     var user = User
         .builder()
         .name(request.getName())
@@ -61,7 +74,7 @@ public class AuthenticationService {
         .build();
   }
 
-  public AuthResponseDto updateProfile(UserUpdateDto request) {
+  public AuthResponseDto updateProfile(UserUpdateRequest request) {
     // Retrieve the currently authenticated user
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -72,16 +85,11 @@ public class AuthenticationService {
 
     // Update the user's information
     if (request.getName() != null) {
-      if (isValidEmail(request.getName())) {
-        user.setName(request.getName());
-        user.setEmail(request.getEmail());
-      } else {
-        return null;
-      }
-    }
-
-    if (request.getName() != null) {
+      Optional<User> userEmail = userRepository.findByEmail(request.getEmail());
       user.setName(request.getName());
+      if (isValidEmail(request.getEmail()) && !userEmail.isPresent()) {
+        user.setEmail(request.getEmail());
+      }
     }
 
     // Save the updated user to the database
@@ -101,8 +109,7 @@ public class AuthenticationService {
   }
 
   private boolean isValidEmail(String email) {
-    String emailRegex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
-        + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+    String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]+$";
     Pattern pattern = Pattern.compile(emailRegex);
     Matcher matcher = pattern.matcher(email);
     return matcher.matches();

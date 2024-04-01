@@ -9,6 +9,8 @@ import { AuthService } from '../../core/services/auth.service';
 import { SubjectsService } from '../../core/services/subjects.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { User } from '../../core/model/user.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-profile',
@@ -28,49 +30,74 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private subjectsService: SubjectsService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
     this.initForm();
-    const subjectSubscription = this.subjectsService.getById().subscribe({
-      next: (response: any) => {
+    this.subscription.add(this.subjectsService.getById().subscribe({
+      next: (response: ITheme[]) => {
         this.themes = response.map((subject: ITheme) => {
           subject.isSubscribe = true;
           subject.showButton = true;
-          return subject
+          return subject;
         })
       },
-      error: (error) => {
+      error: (error: unknown) => {
         console.error('Login error:', error);
       }
-    })
-    this.subscription.add(subjectSubscription)
+    }))
   }
 
-  initForm() {
+  initForm(): void {
     this.profileForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
     });
+    this.subscription.add(this.authService.getMe().subscribe(
+      {
+        next: (response: User) => {
+          this.profileForm.setValue({
+            name: response.name,
+            email: response.email
+          });
+        },
+        error: (error: unknown) => {
+          console.error('Login error:', error);
+        }
+      }
+    ));
+
   }
 
-  onSubmit() {
-
+  onSubmit(): void {
+    const formValue = this.profileForm.value;
+    this.subscription.add(this.authService.updateProfile(formValue).subscribe({
+      next: (response: { jwt: string }) => {
+        this.authService.setToken(response.jwt);
+        this.router.navigate(['/articles']);
+      },
+      error: (error: unknown) => {
+        this.snackBar.open('Il y a un problème avec votre mail ou votre nom d\'utilisateur !', 'OK', {
+          duration: 3000
+        });
+      }
+    }))
   }
 
-  diconnect() {
-    this.authService.disconnect()
-    this.router.navigate(['/'])
+  diconnect(): void {
+    this.authService.disconnect();
+    this.router.navigate(['/']);
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  handleSignalKill(id: number) {
+  handleSignalKill(id: number): void {
     this.themes = this.themes.filter(theme => {
-      return theme.id !== id
+      return theme.id !== id;
     })
   }
 }

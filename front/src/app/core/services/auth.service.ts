@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { API_BASE_URL } from '../../app.config';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { getHeader } from './header';
+import { User } from '../model/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -9,34 +12,37 @@ export class AuthService {
   constructor(private http: HttpClient) {
 
   }
-
-  login(credentials: { email: string; password: string }) {
-    return this.http.post(`${this.apiUrl}/login`, credentials);
+  login(credentials: { email: string; password: string }): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, credentials);
   }
 
-  register(credentials: { email: string, name: string, password: string }) {
-    return this.http.post(`${this.apiUrl}/register`, credentials);
+  register(credentials: { email: string, name: string, password: string }): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/register`, credentials);
   }
 
-  setToken(token: string) {
+  updateProfile(credentials: User): Observable<{ jwt: string }> {
+    return this.http.put<{ jwt: string }>(`${this.apiUrl}/me`, credentials, { headers: getHeader(this.getToken()) });
+  }
+
+  setToken(token: string): void {
     localStorage.setItem('token', token);
   }
 
-  getToken() {
-    return localStorage.getItem('token');
+  getToken(): string {
+    const token = localStorage.getItem('token');
+    return token ? token : "";
   }
 
-  getMe() {
-    return this.http.get(`${this.apiUrl}/me`);
+  getMe(): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/me`, { headers: getHeader(this.getToken()) });
   }
 
-  isAuthenticated() {
-    const token = this.getToken()
+  isAuthenticated(): boolean {
+    const token = this.getToken();
     return !!token;
   }
 
-  disconnect() {
+  disconnect(): void {
     localStorage.removeItem('token');
-
   }
 }

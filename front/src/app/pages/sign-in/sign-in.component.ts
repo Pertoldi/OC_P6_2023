@@ -24,32 +24,31 @@ export class SignInComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initForm();
   }
 
-  initForm() {
+  initForm(): void {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const formValue = this.signInForm.value;
 
-    const loginSubscription = this.authService.login(formValue).subscribe({
-      next: (response: any) => {
+    this.subscription.add(this.authService.login(formValue).subscribe({
+      next: (response: { token: string; }) => {
         const token = response.token;
         this.authService.setToken(token);
-        this.router.navigate(['articles'])
+        this.router.navigate(['articles']);
       },
-      error: (error) => {
+      error: (error: unknown) => {
         console.error('Login error:', error);
       },
     }
-    );
-    this.subscription.add(loginSubscription);
+    ));
   }
 
   ngOnDestroy(): void {

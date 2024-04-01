@@ -1,13 +1,13 @@
 <app-header-private></app-header-private>
-<div class="container">
+<div class="container" *ngIf="article">
   <div class="container-title">
-    <mat-icon class="icon-arrow">keyboard_backspace</mat-icon>
+    <mat-icon class="icon-arrow" [routerLink]="['/articles']">keyboard_backspace</mat-icon>
     <h1>{{article.title}}</h1>
   </div>
   <div class="container-header">
     <span>{{article.createdAt | date: 'dd/mm/yy'}}</span>
     <span>{{article.author.name}}</span>
-    <span>{{theme}}</span>
+    <span>{{article.subject.name}}</span>
   </div>
   <div class="container-content">
     {{article.content}}
@@ -25,8 +25,7 @@
 
 <form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="container-form">
   <div class="wrapper">
-    <textarea placeholder="Écrivez ici votre commentaire" id="comment-area" name="comment-area"
-      formControlName="content" required></textarea>
-    <mat-icon class="submit" type="submit">send</mat-icon>
+    <textarea formControlName="content" placeholder="Écrivez ici votre commentaire" required></textarea>
+    <mat-icon class="submit" (click)="onSubmit()">send</mat-icon>
   </div>
 </form>

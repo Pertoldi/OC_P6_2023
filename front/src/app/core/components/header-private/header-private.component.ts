@@ -12,13 +12,9 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class HeaderPrivateComponent {
 
-  active = ''
+  active = '';
 
   constructor(private router: Router) {
     this.active = this.router.url.split('/').join('');
-  }
-
-  test() {
-    console.log('TEST')
   }
 }

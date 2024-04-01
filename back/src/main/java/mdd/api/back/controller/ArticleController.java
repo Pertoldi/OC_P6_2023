@@ -25,7 +25,6 @@ public class ArticleController {
 
   @PostMapping
   public ResponseEntity<ArticleDto> create(@RequestBody ArticleRequest articleRequest) {
-    System.out.println("articleRequest: " + articleRequest);
     ArticleDto createdArticle = articleService.create(articleRequest);
     return ResponseEntity.ok(createdArticle);
   }

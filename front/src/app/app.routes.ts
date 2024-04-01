@@ -25,23 +25,27 @@ export const routes: Routes = [
   {
     path: 'articles',
     component: ArticlesComponent,
-    // canActivate: [privateGuard]
+    canActivate: [privateGuard]
   },
   {
     path: 'themes',
     component: ThemesListComponent,
+    canActivate: [privateGuard]
   },
   {
-    path: 'article-details',
+    path: 'article/:id',
     component: ArticleDetailsComponent,
+    canActivate: [privateGuard]
   },
   {
     path: 'new-article',
     component: NewArticleComponent,
+    canActivate: [privateGuard]
   },
   {
     path: 'profile',
     component: UserProfileComponent,
+    canActivate: [privateGuard]
   },
   {
     path: '**',

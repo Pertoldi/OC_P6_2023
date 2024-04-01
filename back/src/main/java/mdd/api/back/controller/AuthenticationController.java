@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import mdd.api.back.dto.AuthResponseDto;
-import mdd.api.back.dto.UserUpdateDto;
 import mdd.api.back.model.User;
 import mdd.api.back.request.LoginRequest;
 import mdd.api.back.request.RegisterRequest;
+import mdd.api.back.request.UserUpdateRequest;
 import mdd.api.back.response.AuthenticationResponse;
 import mdd.api.back.service.AuthenticationService;
 import mdd.api.back.service.JwtService;
@@ -41,7 +41,7 @@ public class AuthenticationController {
   }
 
   @PutMapping(value = "me")
-  public ResponseEntity<AuthResponseDto> updateProfile(@RequestBody UserUpdateDto request) {
+  public ResponseEntity<AuthResponseDto> updateProfile(@RequestBody UserUpdateRequest request) {
     AuthResponseDto updateResult = authenticationService.updateProfile(request);
 
     if (updateResult == null) {
