@@ -20,8 +20,8 @@ export class AuthService {
     return this.http.post<{ token: string }>(`${this.apiUrl}/register`, credentials);
   }
 
-  updateProfile(credentials: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/me`, credentials, { headers: getHeader(this.getToken()) });
+  updateProfile(credentials: User): Observable<{ jwt: string }> {
+    return this.http.put<{ jwt: string }>(`${this.apiUrl}/me`, credentials, { headers: getHeader(this.getToken()) });
   }
 
   setToken(token: string): void {

@@ -54,15 +54,15 @@ export class NewArticleComponent implements OnInit {
 
   onSubmit(): void {
     const formValue = this.newArticleForm.value;
-    const registerSubscription = this.articlesService.create(formValue).subscribe({
-      next: (response: IArticle) => {
-        this.router.navigate(['/articles']);
-      },
-      error: (error: unknown) => {
-        console.error('Login error:', error);
-      }
-    });
-    this.subscription.add(registerSubscription);
+    this.subscription.add(
+      this.articlesService.create(formValue).subscribe({
+        next: (response: IArticle) => {
+          this.router.navigate(['/articles']);
+        },
+        error: (error: unknown) => {
+          console.error('Login error:', error);
+        }
+      }));
   }
 
   ngOnDestroy(): void {

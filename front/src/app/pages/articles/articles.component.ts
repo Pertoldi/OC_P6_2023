@@ -21,7 +21,6 @@ export class ArticlesComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
 
-
   constructor(
     private articlesService: ArticlesService
   ) {
@@ -31,14 +30,14 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   articles: IArticle[] = [];
 
   ngOnInit(): void {
-    const articlesSubscription = this.articlesService.getAll().subscribe({
+    this.subscription.add(this.articlesService.getAll().subscribe({
       next: (response: IArticle[]) => {
         this.articles = response;
       },
-      error: (error) => {
+      error: (error: unknown) => {
+        console.error(error);
       }
-    });
-    this.subscription.add(articlesSubscription);
+    }));
   }
 
   ngOnDestroy(): void {

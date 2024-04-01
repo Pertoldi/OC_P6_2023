@@ -34,8 +34,7 @@ export class ThemesComponent implements OnDestroy {
       }));
     }
     else {
-      const subSub = this.subscriptionService.subscribe(this.theme.id).subscribe();
-      this.subscription.add(subSub);
+      this.subscription.add(this.subscriptionService.subscribe(this.theme.id).subscribe());
       this.theme.showButton = false;
     }
   }

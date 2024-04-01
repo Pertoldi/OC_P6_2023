@@ -34,7 +34,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-    const subjectSubscription = this.subjectsService.getById().subscribe({
+    this.subscription.add(this.subjectsService.getById().subscribe({
       next: (response: ITheme[]) => {
         this.themes = response.map((subject: ITheme) => {
           subject.isSubscribe = true;
@@ -45,8 +45,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       error: (error: unknown) => {
         console.error('Login error:', error);
       }
-    })
-    this.subscription.add(subjectSubscription);
+    }))
   }
 
   initForm(): void {
@@ -73,7 +72,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     const formValue = this.profileForm.value;
     this.subscription.add(this.authService.updateProfile(formValue).subscribe({
-      next: (response: User) => {
+      next: (response: { jwt: string }) => {
+        this.authService.setToken(response.jwt);
         this.router.navigate(['/articles']);
       },
       error: (error: unknown) => {

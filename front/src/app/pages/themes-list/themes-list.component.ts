@@ -28,10 +28,10 @@ export class ThemesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const subjectsSubscription = this.subjectsService.getAll().subscribe({
+    this.subscription.add(this.subjectsService.getAll().subscribe({
       next: (response: ITheme[]) => {
         this.themes = response;
-        const subscriptionService = this.subscriptionService.getAll().subscribe({
+        this.subscription.add(this.subscriptionService.getAll().subscribe({
           next: (response: ISubsciption[]) => {
             const themeIdsubscribe = response.map((subscription: { subjectId: number; }) => subscription.subjectId);
             this.themes.forEach(theme => {
@@ -42,14 +42,12 @@ export class ThemesListComponent implements OnInit, OnDestroy {
           error: (error: unknown) => {
             console.error('error is :', error);
           }
-        })
-        this.subscription.add(subscriptionService);
+        }))
       },
       error: (error) => {
         console.error('error is :', error);
       }
-    });
-    this.subscription.add(subjectsSubscription);
+    }));
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

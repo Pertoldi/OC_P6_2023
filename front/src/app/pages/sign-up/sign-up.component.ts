@@ -40,7 +40,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     const formValue = this.signUpForm.value;
 
-    const registerSubscription = this.authService.register(formValue).subscribe({
+    this.subscription.add(this.authService.register(formValue).subscribe({
       next: (response: { token: string }) => {
         const token = response.token;
         this.authService.setToken(token);
@@ -49,8 +49,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
       error: (error: unknown) => {
         console.error('Login error:', error);
       }
-    });
-    this.subscription.add(registerSubscription);
+    }));
   }
 
   ngOnDestroy(): void {
